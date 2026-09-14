@@ -57,6 +57,7 @@ LOGOS = {
     "rubbish-logo.png":       f"{SRC}/rubbish-logo.png",
     "vogue-vintage-logo.png": f"{SRC}/vogue-vintage-logo.png",
 }
+VARIANTS = {}   # name -> full width, filled by build_assets
 FAVICON = """<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='#050505'/><text x='16' y='23' font-family='Arial Black,sans-serif' font-size='15' font-weight='900' text-anchor='middle' fill='#00ED00'>RG</text></svg>"""
 
 def build_assets():
@@ -70,6 +71,10 @@ def build_assets():
         im = Image.open(p).convert("RGB")
         if im.width > w: im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         im.save(f"{out}/img/{name}.webp", "WEBP", quality=q, method=6)
+        if im.width > 720:   # phone variant for srcset
+            VARIANTS[name] = im.width
+            sm = im.resize((720, round(im.height * 720 / im.width)), Image.LANCZOS)
+            sm.save(f"{out}/img/{name}-720.webp", "WEBP", quality=q, method=6)
     for name, p in LOGOS.items():
         im = Image.open(p).convert("RGBA")
         if im.width > 900: im = im.resize((900, round(im.height * 900 / im.width)), Image.LANCZOS)
@@ -94,13 +99,27 @@ def build_pages():
         html = base.render(nav=NAV, path=path, site_url=SITE_URL, base=BASE, body=body,
                            title=meta["title"], description=meta["description"],
                            mbar=meta.get("mbar", "yes") != "no")
+        html = responsive_images(html)
         if BASE:
-            html = re.sub(r'((?:href|src|action)=")/(?!/)', rf'\1{BASE}/', html)
+            html = re.sub(r'((?:href|src|action|srcset)=")/(?!/)', rf'\1{BASE}/', html)
+            html = html.replace(", /assets/img/", f", {BASE}/assets/img/")
         outdir = DIST if path == "/" else os.path.join(DIST, path.strip("/"))
         os.makedirs(outdir, exist_ok=True)
         open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
         pages.append(path)
     return pages
+
+def responsive_images(html):
+    """Add srcset/sizes for photos that have a phone variant, and async image decoding."""
+    def fix(m):
+        tag = m.group(0); name = m.group(1)
+        if name in VARIANTS:
+            full_w = VARIANTS[name]
+            sizes = "100vw" if 'fetchpriority="high"' in tag else "(max-width:760px) 100vw, (max-width:1240px) 50vw, 620px"
+            tag = tag.replace(f'src="/assets/img/{name}.webp"', f'src="/assets/img/{name}.webp" srcset="/assets/img/{name}-720.webp 720w, /assets/img/{name}.webp {full_w}w" sizes="{sizes}"')
+        if "decoding=" not in tag: tag = tag[:-1] + ' decoding="async">'
+        return tag
+    return re.sub(r'<img [^>]*src="/assets/img/([\w-]+)\.webp"[^>]*>', fix, html)
 
 def check_links(pages):
     bad = []

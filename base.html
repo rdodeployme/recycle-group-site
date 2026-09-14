@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ site_url }}{{ base }}/assets/img/og.jpg">
+<link rel="canonical" href="{{ site_url }}{{ base }}{{ path }}">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="container hdr-in">
+    <a class="brand" href="/" aria-label="Recycle Group — home"><img src="/assets/img/recycle-group-logo.png" alt="Recycle Group" width="176" height="28"></a>
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        {% for item in nav %}<li><a href="{{ item.path }}"{% if item.path == path %} class="on" aria-current="page"{% endif %}>{{ item.label }}</a></li>{% endfor %}
+      </ul>
+    </nav>
+    <div class="hdr-cta">
+      <a class="hdr-phone" href="tel:0460555222">0460 555 222</a>
+      <a class="btn btn-green" href="/contact/">Talk to us</a>
+    </div>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Menu</button>
+  </div>
+  <div class="mnav" id="mnav">
+    <div class="container">
+      {% for item in nav %}<a href="{{ item.path }}"{% if item.path == path %} class="on"{% endif %}>{{ item.mlabel or item.label }}</a>{% endfor %}
+      <div class="mnav-cta"><a class="btn btn-green" href="/contact/">Talk to us</a><a class="btn btn-outline" href="tel:0460555222">Call 0460 555 222</a></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+{{ body }}
+</main>
+
+<footer class="ftr">
+  <div class="container">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <img src="/assets/img/recycle-group-logo.png" alt="Recycle Group">
+        <p>A family of collection, recycling and reuse businesses built around one resource recovery facility in North Geelong and one idea: landfill last.</p>
+      </div>
+      <div>
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="https://junk.com.au">JUNK</a></li>
+          <li><a href="https://trash.com.au">Trash.</a></li>
+          <li><a href="https://declutter.com.au">Declutter</a></li>
+          <li><a href="https://rubbish.com.au">Rubbish.com.au</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Recovery &amp; reuse</h4>
+        <ul>
+          <li><a href="https://recycle.net.au">Recycle Group North Geelong</a></li>
+          <li><a href="https://themattressrecyclingcompany.com.au/">The Mattress Recycling Company</a></li>
+          <li><a href="https://styro.com.au">Styro</a></li>
+          <li><span class="tbc">Timbercycle · Nunjara</span></li>
+          <li><a href="https://recyclewarehouse.com.au">Recycle Warehouse</a></li>
+          <li><a href="https://voguevintage.com.au">Vogue Vintage</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Group</h4>
+        <ul>
+          {% for item in nav %}<li><a href="{{ item.path }}">{{ item.mlabel or item.label }}</a></li>{% endfor %}
+          <li><a href="https://echeck.com.au">eCheck</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-rg"><span class="rg-mark"><i>Re</i>cycle Group</span><span>A Recycle Group initiative — Responsible recovery. Sustainable outcomes.</span></div>
+    <div class="ftr-meta">
+      <span>© 2026 Recycle Group · EPA Victoria R000312600</span>
+      <span>116 Furner Avenue, North Geelong VIC 3215 · <a href="mailto:info@recycle.net.au" style="color:inherit">info@recycle.net.au</a></span>
+    </div>
+  </div>
+</footer>
+{% if mbar %}
+<div class="mbar"><a class="btn btn-green" href="/contact/">Talk to us</a><a class="btn btn-outline" href="tel:0460555222">Call us</a></div>
+{% endif %}
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('mnav');
+  b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');b.textContent=o?'Close':'Menu';});
+  var els=document.querySelectorAll('.fx');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el,i){el.style.transitionDelay=(i%4)*60+'ms';io.observe(el);});
+  } else { els.forEach(function(el){el.classList.add('in');}); }
+})();
+</script>
+</body>
+</html>

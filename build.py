@@ -15,14 +15,28 @@ DIST = os.path.join(HERE, OUT)
 SITE_URL = os.environ.get("SITE_URL", "https://recycle-group-corporate.netlify.app").rstrip("/")
 
 NAV = [
-    dict(path="/businesses/", label="Businesses"),
-    dict(path="/how-it-works/", label="How it works"),
-    dict(path="/facility/", label="Facility", mlabel="The facility"),
-    dict(path="/materials/", label="Materials", mlabel="Material streams"),
+    dict(path="/councils/", label="Councils"),
+    dict(path="/industry/", label="Industry", mlabel="Commercial & industry"),
+    dict(path="/facilities/", label="Facilities", mlabel="Our facilities"),
+    dict(path="/materials/", label="Materials", mlabel="What we recover"),
+    dict(path="/businesses/", label="The group"),
     dict(path="/community/", label="Community"),
-    dict(path="/people/", label="People"),
-    dict(path="/where/", label="Where", mlabel="Where we operate"),
+    dict(path="/about/", label="About"),
 ]
+
+# Old URLs from the first build -> where they went. Rendered as stub pages
+# (GitHub Pages has no redirect engine) plus a Netlify _redirects file.
+REDIRECTS = {
+    "/facility/": "/facilities/",
+    "/where/": "/facilities/",
+    "/people/": "/about/",
+}
+
+# Group-wide diversion figure. Richard wants a headline percentage; the JUNK
+# site says 93% and his review says 95%, so the number is NOT published until
+# that is settled. Set DIVERSION to e.g. "95" and it appears in the home proof
+# strip, the councils page and the materials page. Nothing else to change.
+DIVERSION = None
 
 # images: name -> (source, max width, quality)
 IMAGES = {
@@ -46,6 +60,20 @@ IMAGES = {
     "crew-walk":      (f"{SRC}/crew-walk.webp", 800, 66),
     "conveyor":       (f"{SRC}/conveyor.webp", 800, 66),
     "mattress-steel": (f"{SRC}/council-mattress-steel.webp", 800, 66),
+    # Added 16 Sep from the JUNK r22 set (Andy's supplied photography).
+    "facility-wide":  (f"{SRC}/facility-floor-wide.webp", 1260, 72),
+    "mattress-line":  (f"{SRC}/facility-mattress-line.webp", 1260, 72),
+    "nunjara":        (f"{SRC}/rg-nunjara-tile.webp", 918, 74),
+    "declutter-tile": (f"{SRC}/rg-declutter-tile.webp", 1200, 72),
+    "love-junk":      (f"{SRC}/community-love-junk.webp", 1400, 74),
+    "hard-waste":     (f"{SRC}/junk-hard-waste-collection-2.webp", 1260, 72),
+    "fleet":          (f"{SRC}/junk-truck-fleet-numbered.webp", 1260, 72),
+    "warehouse-floor":(f"{SRC}/recycle-warehouse-floor.webp", 1071, 74),
+    "green-waste":    (f"{SRC}/junk-crew-green-waste-load.webp", 1071, 74),
+    "crew-truck":     (f"{SRC}/junk-general-crew-truck-hero.webp", 1260, 72),
+    "industrial":     (f"{SRC}/junk-warehouse-industrial-clearout-hero.webp", 1260, 72),
+    "mattress-crew":  (f"{SRC}/council-mattress-crew.webp", 562, 74),
+    "office-carry":   (f"{SRC}/junk-crew-office-carry.webp", 1071, 74),
 }
 LOGOS = {
     "recycle-group-logo.png": f"{SRC}/recycle-group-logo.png",
@@ -95,7 +123,7 @@ def build_pages():
         meta = dict(l.split(":", 1) for l in head.strip().splitlines())
         meta = {k.strip(): v.strip() for k, v in meta.items()}
         path = meta["path"]
-        body = env.from_string(body).render(form=FORM, **meta)
+        body = env.from_string(body).render(form=FORM, diversion=DIVERSION, base=BASE, **meta)
         html = base.render(nav=NAV, path=path, site_url=SITE_URL, base=BASE, body=body,
                            title=meta["title"], description=meta["description"],
                            mbar=meta.get("mbar", "yes") != "no")
@@ -103,6 +131,7 @@ def build_pages():
         if BASE:
             html = re.sub(r'((?:href|src|action|srcset)=")/(?!/)', rf'\1{BASE}/', html)
             html = html.replace(", /assets/img/", f", {BASE}/assets/img/")
+            html = html.replace("url(/assets/", f"url({BASE}/assets/")
         outdir = DIST if path == "/" else os.path.join(DIST, path.strip("/"))
         os.makedirs(outdir, exist_ok=True)
         open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
@@ -121,18 +150,49 @@ def responsive_images(html):
         return tag
     return re.sub(r'<img [^>]*src="/assets/img/([\w-]+)\.webp"[^>]*>', fix, html)
 
+def prune_images():
+    """Drop any built image no page references, so the repo carries only what it uses."""
+    used = set()
+    for root, _, files in os.walk(DIST):
+        for f in files:
+            if f.endswith(".html"):
+                used |= set(re.findall(r"/assets/img/([\w.-]+)", open(os.path.join(root, f), encoding="utf-8").read()))
+    for p in os.listdir(os.path.join(DIST, "assets", "img")):
+        if p not in used and p != "og.jpg":
+            os.remove(os.path.join(DIST, "assets", "img", p))
+
 def check_links(pages):
     bad = []
     for root, _, files in os.walk(DIST):
         for f in files:
             if not f.endswith(".html"): continue
             html = open(os.path.join(root, f), encoding="utf-8").read()
-            for href in re.findall(r'(?:href|src)="(/[^"#?]*)', html):
+            refs = re.findall(r'(?:href|src)="(/[^"#?]*)', html) + re.findall(r'url\((/[^)]*)\)', html)
+            for href in refs:
                 if BASE and not href.startswith(BASE + "/") and href != BASE: bad.append((f"{root}/{f}", href + " (missing BASE)")); continue
                 target = os.path.join(DIST, href[len(BASE):].strip("/"))
                 if not (os.path.exists(target) or os.path.exists(os.path.join(target, "index.html"))):
                     bad.append((f"{root}/{f}", href))
     return bad
+
+REDIRECT_STUB = """<!DOCTYPE html>
+<html lang="en-AU"><head><meta charset="utf-8">
+<title>Moved — Recycle Group</title>
+<link rel="canonical" href="{site}{base}{to}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={base}{to}">
+<script>location.replace("{base}{to}" + location.hash);</script>
+</head><body style="font-family:system-ui;padding:40px">
+<p>This page moved. <a href="{base}{to}">Continue to {to}</a>.</p>
+</body></html>
+"""
+
+def build_redirects():
+    for old, new in REDIRECTS.items():
+        d = os.path.join(DIST, old.strip("/"))
+        os.makedirs(d, exist_ok=True)
+        open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(
+            REDIRECT_STUB.format(site=SITE_URL, base=BASE, to=new))
 
 if __name__ == "__main__":
     if os.path.isdir(DIST): shutil.rmtree(DIST)
@@ -141,9 +201,13 @@ if __name__ == "__main__":
     pages = build_pages()
     open(f"{DIST}/sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE_URL}{BASE}{p}</loc></url>\n" for p in pages if p != "/thanks/") + "</urlset>\n")
     open(f"{DIST}/robots.txt", "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}{BASE}/sitemap.xml\n")
-    if FORM == "netlify": open(f"{DIST}/_redirects", "w").write("/index.html / 301\n")
+    build_redirects()
+    if FORM == "netlify":
+        open(f"{DIST}/_redirects", "w").write("/index.html / 301\n" + "".join(
+            f"{o} {n} 301\n" for o, n in REDIRECTS.items()))
     else: open(f"{DIST}/.nojekyll", "w").write("")
-    bad = check_links(pages)
+    prune_images()
+    bad = [x for x in check_links(pages) if not any(x[1].endswith(o) for o in REDIRECTS)]
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(DIST) for f in fs)
     print("pages:", ", ".join(pages))
     print("dist:", round(total / 1e6, 2), "MB")

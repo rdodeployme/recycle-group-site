@@ -498,3 +498,150 @@ a.tile:hover{transform:translateY(-3px);border-color:var(--black);box-shadow:0 1
   .tile-body{padding:12px 12px 14px}
   .logo-strip a{height:64px}
 }
+
+/* ===== corporate components (16 Sep) — this site's own, not JUNK's ===== */
+
+/* trademark mark */
+.tm{font-size:.5em;vertical-align:super;letter-spacing:0}
+
+/* audience doors: label the reader, not the section */
+.door-who{position:absolute;top:0;left:0;background:var(--green);color:var(--black);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;z-index:2}
+
+/* stream table — material in, what it becomes, where it goes */
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.rtable{width:100%;border-collapse:collapse;font-size:.95rem;min-width:640px}
+table.rtable th,table.rtable td{text-align:left;padding:14px 18px 14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.rtable thead th{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:2px solid var(--black);padding-bottom:10px}
+table.rtable tbody tr:last-child td{border-bottom:0}
+table.rtable .m{font-weight:700;white-space:nowrap}
+table.rtable .b{color:var(--ink-2)}
+table.rtable .w{color:var(--muted);font-size:.88rem}
+.dark table.rtable th,.dark table.rtable td,.dark-2 table.rtable th,.dark-2 table.rtable td{border-color:var(--line-dark)}
+.dark table.rtable thead th,.dark-2 table.rtable thead th{color:var(--muted-dark);border-bottom-color:var(--green)}
+.dark table.rtable .b,.dark-2 table.rtable .b{color:#e9e9e6}
+.dark table.rtable .w,.dark-2 table.rtable .w{color:var(--muted-dark)}
+
+/* the 90+ streams, made visible */
+.chipwall{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.chipwall span{border:1px solid var(--line-dark);border-radius:999px;padding:6px 13px;font-size:.84rem;font-weight:600;color:#e9e9e6}
+.chipwall span.hi{background:var(--green);border-color:var(--green);color:var(--black);font-weight:700}
+.chipwall span.more{border-style:dashed;color:var(--muted-dark)}
+.paper-2 .chipwall span,.sec:not(.dark):not(.dark-2) .chipwall span{border-color:var(--line);color:var(--ink-2)}
+
+/* facility cards — the group owns two sites */
+.sites{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.site{background:var(--white);border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;display:flex;flex-direction:column}
+.dark .site,.dark-2 .site{background:var(--ink-2);border-color:var(--line-dark)}
+.site-ph{aspect-ratio:16/9;overflow:hidden;background:var(--black)}
+.site-ph img{width:100%;height:100%;object-fit:cover}
+.site-body{padding:26px 26px 28px;flex:1;display:flex;flex-direction:column}
+.site-tag{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--green-ink);margin-bottom:10px}
+.dark .site-tag,.dark-2 .site-tag{color:var(--green)}
+.site h3{font-family:var(--font-d);text-transform:uppercase;font-size:1.5rem;margin:0 0 6px;line-height:1}
+.site-where{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+.dark .site-where,.dark-2 .site-where{color:var(--muted-dark)}
+.site dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:.92rem;border-top:1px solid var(--line);padding-top:16px}
+.dark .site dl,.dark-2 .site dl{border-color:var(--line-dark)}
+.site dt{font-weight:700;white-space:nowrap}
+.site dd{margin:0;color:var(--muted)}
+.dark .site dd,.dark-2 .site dd{color:var(--muted-dark)}
+@media (max-width:860px){.sites{grid-template-columns:1fr}}
+
+/* numbered ladder — the practical starting point */
+.ladder{counter-reset:l;display:grid;gap:0}
+.ladder li{counter-increment:l;list-style:none;display:grid;grid-template-columns:64px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+.ladder li:last-child{border-bottom:1px solid var(--line)}
+.dark .ladder li,.dark-2 .ladder li{border-color:var(--line-dark)}
+.ladder li::before{content:counter(l,decimal-leading-zero);font-family:var(--font-d);font-size:1.6rem;line-height:1;color:var(--green-ink)}
+.dark .ladder li::before,.dark-2 .ladder li::before{color:var(--green)}
+.ladder h3{font-family:var(--font-b);font-weight:700;font-size:1.06rem;margin:0 0 5px}
+.ladder p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55}
+.dark .ladder p,.dark-2 .ladder p{color:var(--muted-dark)}
+.ladder ul{margin:0;padding:0;list-style:none}
+@media (max-width:560px){.ladder li{grid-template-columns:44px 1fr;gap:14px}.ladder li::before{font-size:1.2rem}}
+
+/* what this is / isn't */
+.isnt{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.dark .isnt,.dark-2 .isnt{border-color:var(--line-dark)}
+.isnt>div{padding:26px 26px 28px}
+.isnt>div+div{border-left:1px solid var(--line)}
+.dark .isnt>div+div,.dark-2 .isnt>div+div{border-left-color:var(--line-dark)}
+.isnt h3{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin:0 0 16px}
+.isnt .yes h3{color:var(--green-ink)}
+.dark .isnt .yes h3,.dark-2 .isnt .yes h3{color:var(--green)}
+.isnt .no h3{color:var(--muted)}
+.isnt ul{margin:0;padding:0;list-style:none}
+.isnt li{padding:7px 0 7px 26px;position:relative;font-size:.95rem;line-height:1.5}
+.isnt .yes li::before{content:"";position:absolute;left:2px;top:15px;width:11px;height:6px;border-left:2.5px solid var(--green-ink);border-bottom:2.5px solid var(--green-ink);transform:rotate(-45deg)}
+.dark .isnt .yes li::before,.dark-2 .isnt .yes li::before{border-color:var(--green)}
+.isnt .no li{color:var(--muted)}
+.dark .isnt .no li,.dark-2 .isnt .no li{color:var(--muted-dark)}
+.isnt .no li::before{content:"";position:absolute;left:4px;top:17px;width:11px;height:2px;background:currentColor}
+@media (max-width:640px){.isnt{grid-template-columns:1fr}.isnt>div+div{border-left:0;border-top:1px solid var(--line)}.dark .isnt>div+div{border-top-color:var(--line-dark)}}
+
+/* figure callout — one number given real size */
+.bignum{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,48px);align-items:center;background:var(--green);color:var(--black);border-radius:var(--r-l);padding:clamp(26px,4vw,48px)}
+.bignum .n{font-family:var(--font-d);font-size:clamp(3.4rem,10vw,8rem);line-height:.86;letter-spacing:-.03em}
+.bignum .n small{font-size:.32em;display:block;letter-spacing:.06em;margin-top:8px}
+.bignum p{margin:0;font-size:clamp(1.02rem,1.5vw,1.25rem);font-weight:600;line-height:1.5;max-width:52ch}
+.bignum p+p{margin-top:.6em;font-weight:500;font-size:.95rem;opacity:.82}
+@media (max-width:640px){.bignum{grid-template-columns:1fr;gap:16px}}
+
+/* footer credentials row */
+.creds{display:flex;flex-wrap:wrap;gap:8px 10px;padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--line-dark)}
+.creds span{border:1px solid var(--line-dark);border-radius:999px;padding:6px 13px;font-size:.76rem;font-weight:700;letter-spacing:.04em;color:#e9e9e6;white-space:nowrap}
+@media (max-width:520px){.creds span{font-size:.7rem;padding:5px 10px}}
+
+/* contact routes */
+.routes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.route{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:var(--r-l);padding:22px 20px 24px;display:flex;flex-direction:column;text-decoration:none}
+.route:hover{border-color:var(--green)}
+.route .k{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--green);margin-bottom:10px}
+.route b{font-size:1.02rem;line-height:1.3;margin-bottom:6px}
+.route p{margin:0;font-size:.9rem;color:var(--muted-dark);line-height:1.5;flex:1}
+.route .go{margin-top:14px;font-weight:700;font-size:.88rem;color:#fff}
+.route .go::after{content:" →";color:var(--green)}
+@media (max-width:1000px){.routes{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.routes{grid-template-columns:1fr}}
+
+/* tile header with a photo behind the logo — Richard: every tile needs a picture */
+.tile-logo[style*="--img"]{background-image:linear-gradient(rgba(5,5,5,.52),rgba(5,5,5,.72)),var(--img);background-size:cover;background-position:center;border-bottom-color:transparent}
+.tile-logo[style*="--img"] img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
+.tile-logo[style*="--img"].text{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+a.tile:hover .tile-logo[style*="--img"]{background-image:linear-gradient(rgba(5,5,5,.42),rgba(5,5,5,.66)),var(--img)}
+
+/* streams table: stop column one from starving the other two */
+table.rtable{table-layout:fixed}
+table.rtable thead th:nth-child(1){width:26%}
+table.rtable thead th:nth-child(2){width:30%}
+table.rtable thead th:nth-child(3){width:44%}
+table.rtable .m{white-space:normal}
+@media (max-width:760px){table.rtable{min-width:560px}}
+
+/* recovery table: stack into labelled blocks on phones rather than side-scroll */
+@media (max-width:700px){
+  .tablewrap{overflow:visible}
+  table.rtable{min-width:0;display:block;table-layout:auto}
+  table.rtable thead{display:none}
+  table.rtable tbody,table.rtable tr,table.rtable td{display:block;width:auto}
+  table.rtable tr{padding:15px 0;border-bottom:1px solid var(--line)}
+  table.rtable tr:last-child{border-bottom:0}
+  .dark table.rtable tr,.dark-2 table.rtable tr{border-color:var(--line-dark)}
+  table.rtable td{padding:0;border:0}
+  table.rtable td+td{margin-top:9px}
+  table.rtable .m{font-size:1.04rem;line-height:1.3}
+  table.rtable td.b::before,table.rtable td.w::before{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+  .dark table.rtable td.b::before,.dark-2 table.rtable td.b::before,.dark table.rtable td.w::before,.dark-2 table.rtable td.w::before{color:var(--green)}
+  .t-site td.b::before{content:"What it is"}
+  .t-site td.w::before{content:"Where it goes"}
+  .t-mat td.b::before{content:"What it becomes"}
+  .t-mat td.w::before{content:"Handled by"}
+}
+/* sub-page heroes need a heavier scrim on phones — headings sit over busy photos */
+@media (max-width:760px){
+  .phero .hero-img::after{background:linear-gradient(180deg,rgba(5,5,5,.62) 0%,rgba(5,5,5,.66) 40%,rgba(5,5,5,.96) 100%)}
+}
+/* the Call button on the phone bar was near-invisible on black */
+.mbar .btn-outline{color:#fff;border-color:#fff}
+.mbar .btn-outline:hover{background:#fff;color:var(--black)}
+@media (max-width:760px){.phero-in{padding-block:78px 34px}}

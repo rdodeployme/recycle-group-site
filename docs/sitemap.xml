@@ -2,11 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://rdodeployme.github.io/recycle-group-site/</loc></url>
   <url><loc>https://rdodeployme.github.io/recycle-group-site/businesses/</loc></url>
+  <url><loc>https://rdodeployme.github.io/recycle-group-site/councils/</loc></url>
   <url><loc>https://rdodeployme.github.io/recycle-group-site/how-it-works/</loc></url>
-  <url><loc>https://rdodeployme.github.io/recycle-group-site/facility/</loc></url>
+  <url><loc>https://rdodeployme.github.io/recycle-group-site/industry/</loc></url>
+  <url><loc>https://rdodeployme.github.io/recycle-group-site/facilities/</loc></url>
   <url><loc>https://rdodeployme.github.io/recycle-group-site/materials/</loc></url>
   <url><loc>https://rdodeployme.github.io/recycle-group-site/community/</loc></url>
-  <url><loc>https://rdodeployme.github.io/recycle-group-site/people/</loc></url>
-  <url><loc>https://rdodeployme.github.io/recycle-group-site/where/</loc></url>
+  <url><loc>https://rdodeployme.github.io/recycle-group-site/about/</loc></url>
   <url><loc>https://rdodeployme.github.io/recycle-group-site/contact/</loc></url>
 </urlset>

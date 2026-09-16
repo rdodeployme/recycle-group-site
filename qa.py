@@ -1,6 +1,6 @@
 import asyncio
 from playwright.async_api import async_playwright
-PAGES=["/","/businesses/","/how-it-works/","/facility/","/materials/","/community/","/people/","/where/","/contact/","/thanks/"]
+PAGES=["/","/councils/","/industry/","/facilities/","/materials/","/businesses/","/community/","/about/","/how-it-works/","/contact/","/thanks/"]
 async def main():
     async with async_playwright() as p:
         b=await p.chromium.launch(); fails=[]

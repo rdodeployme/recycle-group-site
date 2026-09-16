@@ -7,11 +7,23 @@ mbar: no
   <div class="container phero-in">
     <p class="crumbs"><a href="/">Recycle Group</a><span>Talk to us</span></p>
     <h1 class="h-d">Ready to <span class="t-green">move?</span></h1>
-    <p class="lead">Councils, commercial partners, charities, retailers, industry peers — if you care where your material ends up, let's talk. We'll come and get it, and we'll show you where it goes.</p>
+    <p class="lead">Councils, commercial and industrial sites, charities, retailers and industry peers — if you care where your material ends up, start here. We will come and get it, and we will show you where it goes.</p>
   </div>
 </section>
 
-<section class="sec dark">
+
+<section class="sec-s dark-2">
+  <div class="container">
+    <div class="routes">
+      <a class="route" href="/contact/?intent=council#form"><span class="k">Councils</span><b>Hard waste &amp; the difficult streams</b><p>Mattresses, soft furniture, polystyrene, e-waste and paint — plus a floor you can bring your officers to.</p><span class="go">Start here</span></a>
+      <a class="route" href="/contact/?intent=commercial#form"><span class="k">Commercial &amp; industry</span><b>Site recovery &amp; decommissioning</b><p>Ports, terminals, industrial estates and manufacturers. Nigel Taylor, 0427 888 222.</p><span class="go">Arrange a site walk</span></a>
+      <a class="route" href="/contact/?intent=charity#form"><span class="k">Charities</span><b>Material aid</b><p>If you support people who need household essentials, we would like to hear from you.</p><span class="go">Become a partner</span></a>
+      <a class="route" href="/contact/?intent=visit#form"><span class="k">Anyone</span><b>Book a facility visit</b><p>An afternoon at North Geelong. Watch a mattress go through the line and ask the operators.</p><span class="go">Request a visit</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark" id="form">
   <div class="container">
     <div class="contact-grid" style="align-items:start">
       <div>
@@ -29,11 +41,12 @@ mbar: no
           <div>
             <label for="f-intent">I'm getting in touch as</label>
             <select id="f-intent" name="intent">
-              <option value="council">A council or government body</option>
-              <option value="commercial">A commercial or multi-site partner</option>
+              <option value="council">A council, regional waste group or government body</option>
+              <option value="commercial">A commercial, industrial or multi-site operator</option>
               <option value="charity">A charity or community organisation</option>
-              <option value="retailer">A retailer or manufacturer</option>
+              <option value="retailer">A retailer, manufacturer or product steward</option>
               <option value="visit">Someone who'd like to visit the facility</option>
+              <option value="trade">A trade buyer of recovered material</option>
               <option value="careers">Someone asking about roles</option>
               <option value="media">Media or industry</option>
               <option value="other">Something else</option>
@@ -41,14 +54,15 @@ mbar: no
           </div>
           <div><label for="f-msg">What's on your mind</label><textarea id="f-msg" name="message" required></textarea></div>
           <div class="btn-row" style="margin-top:6px"><button class="btn btn-green btn-lg" type="submit">Send it</button></div>
-          <p class="fine">{% if form == "netlify" %}We reply from info@recycle.net.au, usually within two working days.{% else %}Sending opens a pre-filled email to info@recycle.net.au from your mail app. We reply from the same address, usually within two working days.{% endif %}</p>
+          <p class="fine">{% if form == "netlify" %}We reply from info@recycle.net.au.{% else %}Sending opens a pre-filled email to info@recycle.net.au from your mail app. We reply from the same address, as soon as we can.{% endif %}</p>
         </form>
       </div>
       <ul class="contact-list">
         <li><b>Email</b><a href="mailto:info@recycle.net.au">info@recycle.net.au</a></li>
         <li><b>Phone</b><a href="tel:0460555222">0460 555 222</a></li>
         <li><b>Corporate &amp; trade</b><span>Nigel Taylor · <a href="tel:0427888222">0427 888 222</a></span></li>
-        <li><b>Visit</b><span>116 Furner Avenue, North Geelong VIC 3215<br><span style="color:var(--muted-dark);font-size:.9rem">Transfer station open six days a week — see <a href="https://recycle.net.au" style="color:#fff">recycle.net.au</a> for hours</span></span></li>
+        <li><b>North Geelong</b><span>116 Furner Avenue, North Geelong VIC 3215<br><span style="color:var(--muted-dark);font-size:.9rem">Transfer station open Monday to Saturday, 7:30 am – 5:00 pm — <a href="https://recycle.net.au" style="color:#fff">recycle.net.au</a></span></span></li>
+        <li><b>Moorabool</b><span>Nunjara — Atkinson's Road, Moorabool VIC<br><span style="color:var(--muted-dark);font-size:.9rem">Soils, aggregates and organics — <a href="https://nunjara.com" style="color:#fff">nunjara.com</a></span></span></li>
         <li><b>Book a job</b><span><a href="https://junk.com.au">JUNK</a> · <a href="https://trash.com.au">Trash.</a> · <a href="https://declutter.com.au">Declutter</a></span></li>
       </ul>
     </div>

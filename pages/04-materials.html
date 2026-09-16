@@ -1,50 +1,79 @@
 path: /materials/
-title: Material streams — Recycle Group
-description: What happens to mattresses, polystyrene, cardboard, metal, timber, green waste, e-waste and cable, and the hard-to-place items, at Recycle Group North Geelong.
+title: What we recover — Recycle Group
+description: What can your waste become? Every material stream Recycle Group separates, what it turns into, and where it goes — mattresses, polystyrene, cable, timber, metal, cardboard, soils and green waste.
 ---
 <section class="phero">
-  <div class="hero-img"><img src="/assets/img/steel.webp" alt="Loose recovered spring steel in a bin" fetchpriority="high"></div>
+  <div class="hero-img"><img src="/assets/img/sep.webp" alt="The separation table at the North Geelong facility" fetchpriority="high"></div>
   <div class="container phero-in">
-    <p class="crumbs"><a href="/">Recycle Group</a><span>Material streams</span></p>
-    <h1 class="h-d">We don't just <span class="t-green">talk green.</span></h1>
-    <p class="lead">Every load is received, sorted and streamed into more than 90 categories. These are the streams that matter most — by weight, by volume and by how hard they are to keep out of the ground.</p>
+    <p class="crumbs"><a href="/">Recycle Group</a><span>What we recover</span></p>
+    <h1 class="h-d">What can your waste <span class="t-green">become?</span></h1>
+    <p class="lead">It is a better question than "where does it go", because it has a specific answer for every stream. This is the whole list — the material in, what it turns into, and who handles it.</p>
   </div>
 </section>
 
+<section class="sec">
+  <div class="container">
+    <div class="tablewrap">
+      <table class="rtable t-mat">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+        <thead><tr><th>Material</th><th>What it becomes</th><th>Handled by</th></tr></thead>
+        <tbody>
+          <tr><td class="m">Mattresses &amp; bases</td><td class="b">Baled spring steel back into steel manufacturing; foam and fibre into downstream products; timber reprocessed</td><td class="w">The Mattress Recycling Company · North Geelong</td></tr>
+          <tr><td class="m">Soft furniture</td><td class="b">Reused where it is good enough; otherwise timber, foam, fibre and metal, each into its own stream</td><td class="w">North Geelong · community partners</td></tr>
+          <tr><td class="m">Polystyrene (EPS)</td><td class="b">Densified blocks, reprocessed into picture frames, skirting boards, wall panels, outdoor furniture and packaging</td><td class="w">Styro · North Geelong</td></tr>
+          <tr><td class="m">Cable</td><td class="b">Copper granulate sold as a commodity; insulation separated</td><td class="w">North Geelong</td></tr>
+          <tr><td class="m">E-waste &amp; IT equipment</td><td class="b">Components and metals recovered; data-bearing devices sanitised</td><td class="w">North Geelong — AS/NZS 5377, NIST 800-88</td></tr>
+          <tr><td class="m">Whitegoods &amp; scrap metal</td><td class="b">Ferrous and non-ferrous metal, baled or containerised and exported</td><td class="w">North Geelong</td></tr>
+          <tr><td class="m">Cardboard</td><td class="b">Baled, containerised and exported as a commodity</td><td class="w">North Geelong</td></tr>
+          <tr><td class="m">Plain timber &amp; pallets</td><td class="b">Reused or reprocessed rather than landfilled</td><td class="w">North Geelong</td></tr>
+          <tr><td class="m">Green waste</td><td class="b">Mulches and composts</td><td class="w">Nunjara Bio Organics · Moorabool</td></tr>
+          <tr><td class="m">Concrete, brick &amp; rock</td><td class="b">Crushed recycled aggregates</td><td class="w">Nunjara Resources · Moorabool</td></tr>
+          <tr><td class="m">Soils &amp; clean fill</td><td class="b">Recycled soil blends</td><td class="w">Nunjara Soils · Moorabool</td></tr>
+          <tr><td class="m">Paint</td><td class="b">Architectural and decorative paint into the Paintback pathway</td><td class="w">North Geelong · Paintback</td></tr>
+          <tr><td class="m">Batteries &amp; canisters</td><td class="b">Car, domestic and lithium batteries, NOS canisters, fire extinguishers and tyres, each to a licensed pathway</td><td class="w">North Geelong</td></tr>
+          <tr><td class="m">Household goods in working order</td><td class="b">Reused — into homes, through charity and community partners</td><td class="w">Charity and community partners · 45+ organisations</td></tr>
+          <tr><td class="m">Residual</td><td class="b">Reduced to about a quarter of its volume before landfill — less airspace, better compaction, a more stable rehabilitation cell</td><td class="w">North Geelong</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:20px">Not accepted, at either site: asbestos, prescribed waste, hazardous chemicals, firearms or explosives.</p>
+  </div>
+</section>
+
+{% if diversion %}
+<section class="sec-s">
+  <div class="container">
+    <div class="bignum fx">
+      <div class="n">{{ diversion }}<small>% recovered</small></div>
+      <div><p>Of everything collected across the group — reused, recycled or recovered rather than landfilled.</p></div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <section class="sec dark-2">
   <div class="container">
+    <div class="sec-head">
+      <p class="kicker">The four that matter most</p>
+      <h2 class="h-d">We don't just <span class="t-green">talk green.</span></h2>
+      <p class="lead">By weight, by volume, and by how hard they are to keep out of the ground, these are the streams the group was built around.</p>
+    </div>
     <div class="streams">
       <div class="stream fx">
         <div class="ph"><img src="/assets/img/steel.webp" alt="Loose recovered spring steel in a bin" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Mattresses</h3><p>Around 30% of a mattress is steel. Springs are separated by magnets, vibration, high-volume suction and an electrostatic fibre separator, baled 99% clean, and exported as a commodity. Foam and fibre are separated for downstream use.</p><span class="brand">The Mattress Recycling Company</span></div>
+        <div class="stream-body"><h3 class="stream-t">Mattresses</h3><p>Around 30% of a mattress is steel. Springs are separated by magnets, vibration, high-volume suction and an electrostatic fibre separator, baled 99% clean, and exported as a commodity. Roughly 270 tonnes of steel out of every 10,000 mattresses in.</p><span class="brand">The Mattress Recycling Company</span></div>
       </div>
       <div class="stream fx">
         <div class="ph"><img src="/assets/img/poly-out.webp" alt="Densified polystyrene logs after processing" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Polystyrene</h3><p>Expanded polystyrene is up to 98% air. It is densified on site into solid blocks — a fraction of the volume — and reprocessed into new products such as picture frames, cornices and laminated timber.</p><span class="brand">Styro</span></div>
+        <div class="stream-body"><h3 class="stream-t">Polystyrene</h3><p>Up to 98% air, which is why it is uneconomic for everyone else. Densified on site into solid blocks — a fraction of the volume — and reprocessed into new product. Businesses can order reusable Styro Bags in 1, 4 or 8 m³ and have them collected.</p><span class="brand">Styro</span></div>
       </div>
       <div class="stream fx">
-        <div class="ph"><img src="/assets/img/cable.webp" alt="Visitors at the cable processing line at North Geelong" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">E-waste &amp; cable</h3><p>Cable is granulated to separate copper from insulation. Electrical items and IT equipment are handled to AS/NZS 5377, with data-bearing devices sanitised to NIST 800-88.</p><span class="brand">Recycle Group North Geelong</span></div>
+        <div class="ph"><img src="/assets/img/cable.webp" alt="A separation table on the floor at North Geelong" loading="lazy"></div>
+        <div class="stream-body"><h3 class="stream-t">E-waste &amp; cable</h3><p>Cable is granulated to separate copper from insulation. Electrical items and IT equipment are handled to AS/NZS 5377, with data-bearing devices sanitised to NIST 800-88 — which is what makes the stream usable for a council or a corporate.</p><span class="brand">Recycle North Geelong</span></div>
       </div>
       <div class="stream fx">
-        <div class="ph"><img src="/assets/img/sorting.webp" alt="A crew member sorting timber offcuts into a cage" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Timber &amp; pallets</h3><p>Plain timber and pallets are recovered from clean-outs, sites and the transfer station and reprocessed rather than sent to landfill.</p><span class="brand">Timbercycle</span></div>
-      </div>
-      <div class="stream fx">
-        <div class="ph"><img src="/assets/img/granulate.webp" alt="Copper granulate recovered from cable" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Metal</h3><p>Ferrous and non-ferrous metal recovered across the site — from whitegoods to spring steel to copper granulate — is baled or containerised and exported as a commodity.</p><span class="brand">Recycle Group North Geelong</span></div>
-      </div>
-      <div class="stream fx">
-        <div class="ph"><img src="/assets/img/line.webp" alt="The sorting line and cages at the facility" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Cardboard</h3><p>Baled on conveyor-fed balers, containerised and exported. One of the four operations that run from the North Geelong site.</p><span class="brand">Recycle Group North Geelong</span></div>
-      </div>
-      <div class="stream fx">
-        <div class="ph"><img src="/assets/img/crew-walk.webp" alt="Visitors walking the plant floor at North Geelong" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">Green waste</h3><p>Green waste from clean-ups, council collections and the transfer station goes to Nunjara — the group's traceable resource recovery arm — rather than to landfill.</p><span class="brand">Nunjara</span></div>
-      </div>
-      <div class="stream fx">
-        <div class="ph"><img src="/assets/img/steel-bin.webp" alt="A bin of recovered steel" loading="lazy"></div>
-        <div class="stream-body"><h3 class="stream-t">The hard-to-place items</h3><p>Paint, car, domestic and lithium batteries, NOS canisters, fire extinguishers and tyres are accepted at the transfer station — because the alternative is unlawful dumping. Asbestos, prescribed waste, hazardous chemicals, firearms and explosives are not.</p><span class="brand">Recycle Group North Geelong</span></div>
+        <div class="ph"><img src="/assets/img/green-waste.webp" alt="Green waste being loaded" loading="lazy"></div>
+        <div class="stream-body"><h3 class="stream-t">Green waste, soils &amp; aggregate</h3><p>Green waste becomes mulch and compost; concrete, brick and rock are crushed into recycled aggregate; contaminated and mixed soils are blended back into usable material. All at the group's 100-acre Moorabool site.</p><span class="brand">Nunjara</span></div>
       </div>
     </div>
   </div>
@@ -54,16 +83,18 @@ description: What happens to mattresses, polystyrene, cardboard, metal, timber, 
   <div class="container">
     <div class="split">
       <div>
-        <p class="kicker">Why recycling costs more than the tip</p>
+        <p class="kicker">The honest part</p>
         <h2 class="h-d">Recovery is <span class="t-green-ink">work.</span></h2>
-        <p class="lead">Landfill is cheap because it does nothing. Recovering a mattress means seven operators, two diesel shredders using more than 450 litres of fuel a day each, four dust extraction units that take four hours each to clean, and $8.5 million of plant to recover 99% of the steel. That is why a recycled mattress costs more than a tipped one — and why the group publishes the residual rather than hiding it.</p>
+        <p class="lead">Landfill is cheap because it does nothing. Recovering a mattress means seven operators, two diesel shredders using more than 450 litres of fuel a day each, four dust extraction units that take four hours each to clean, and $8.5 million of plant to get 99% of the steel out.</p>
+        <p class="sub">That is why a recycled mattress costs more than a tipped one. It is also why what can't be recovered is called residual rather than folded into a recovery figure, and why we would rather show someone the floor than send them a brochure.</p>
+        <div class="btn-row"><a class="btn btn-black" href="/facilities/">See the plant</a><a class="btn btn-outline" href="/how-it-works/">The five steps</a></div>
       </div>
       <div>
         <ul class="num-list">
-          <li><div><b>Receive and assess.</b> Every item is checked for reuse first.</div></li>
+          <li><div><b>Receive and assess.</b> Every item is checked for reuse before anything else happens.</div></li>
           <li><div><b>Separate.</b> Magnets, vibration, suction and electrostatic separation split materials cleanly.</div></li>
-          <li><div><b>Bale, densify or containerise.</b> Each stream is prepared as a commodity a manufacturer can use.</div></li>
-          <li><div><b>Recycle back into manufacturing.</b> Steel, polystyrene, cardboard and metal leave as raw material, not waste.</div></li>
+          <li><div><b>Bale, densify or crush.</b> Each stream is prepared as something a manufacturer can actually use.</div></li>
+          <li><div><b>Back into manufacturing.</b> Steel, polystyrene, cardboard, copper and aggregate leave as raw material, not waste.</div></li>
         </ul>
       </div>
     </div>
@@ -73,8 +104,8 @@ description: What happens to mattresses, polystyrene, cardboard, metal, timber, 
 <section class="sec-s paper-2">
   <div class="container">
     <div class="next">
-      <a href="/community/"><span class="k">Next</span><span class="t">Community →</span></a>
-      <a href="/how-it-works/"><span class="k">Back to</span><span class="t">How it works →</span></a>
+      <a href="/councils/"><span class="k">For councils</span><span class="t">The difficult streams →</span></a>
+      <a href="/industry/"><span class="k">For industry</span><span class="t">Site recovery →</span></a>
     </div>
   </div>
 </section>

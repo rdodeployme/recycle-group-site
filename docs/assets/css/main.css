@@ -645,3 +645,11 @@ table.rtable .m{white-space:normal}
 .mbar .btn-outline{color:#fff;border-color:#fff}
 .mbar .btn-outline:hover{background:#fff;color:var(--black)}
 @media (max-width:760px){.phero-in{padding-block:78px 34px}}
+
+/* polystyrene has no photography outside the council-visit day, so the stream
+   carries a figure panel instead of a picture (17 Sep 2026) */
+.stream .ph.figure{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:18px;text-align:center;background:var(--black);box-shadow:inset 0 0 0 1px var(--line-dark)}
+.stream .ph.figure b{font-family:var(--font-d);font-size:clamp(3.2rem,6vw,4.8rem);line-height:.9;letter-spacing:-.02em;color:var(--green)}
+.stream .ph.figure span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted-dark)}
+.stream .ph.figure .k{margin-bottom:2px}
+

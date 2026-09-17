@@ -40,40 +40,39 @@ DIVERSION = None
 
 # images: name -> (source, max width, quality)
 IMAGES = {
-    "hero-mattress":  (f"{SRC}/blog-facility-hero-mattress-floor.webp", 1600, 74),
-    "sorting-line":   (f"{SRC}/council-visit-hero.webp", 1600, 66),
-    "floor":          (f"{SRC}/floor.webp", 1600, 66),
-    "line":           (f"{SRC}/line.webp", 1200, 66),
-    "steel":          (f"{SRC}/blog-cheaper-hero-spring-steel.webp", 1100, 66),
-    "poly-machine":   (f"{SRC}/council-eps-machine.webp", 800, 66),
-    "poly-out":       (f"{SRC}/council-eps-output.webp", 700, 66),
-    "poly-ctn":       (f"{SRC}/council-eps-container.webp", 700, 66),
-    "cable":          (f"{SRC}/council-cable-group.webp", 700, 66),
-    "granulate":      (f"{SRC}/granulate.webp", 700, 64),
-    "sep":            (f"{SRC}/blog-loop-hero-separation-table.webp", 1100, 66),
-    "aid":            (f"{SRC}/comm-materialaid-delivery.webp", 1100, 66),
-    "sorting":        (f"{SRC}/junk-community-sorting-square.webp", 800, 66),
-    "junk-truck":     (f"{SRC}/junk-household-rubbish-removal-hero.webp", 1200, 66),
-    "talking":        (f"{SRC}/council-visit-talking.webp", 800, 66),
-    "mattress-stack": (f"{SRC}/mattress-stack.webp", 800, 66),
-    "steel-bin":      (f"{SRC}/steel-bin.webp", 900, 66),
-    "crew-walk":      (f"{SRC}/crew-walk.webp", 800, 66),
-    "conveyor":       (f"{SRC}/conveyor.webp", 800, 66),
-    "mattress-steel": (f"{SRC}/council-mattress-steel.webp", 800, 66),
-    # Added 16 Sep from the JUNK r22 set (Andy's supplied photography).
+    # Photography rule (17 Sep 2026): nothing shot on the council-visit / factory-tour
+    # day goes on this site. That rules out the whole council-* set and the phone snaps
+    # taken alongside it (floor, line, conveyor, crew-walk, granulate, steel-bin,
+    # mattress-stack, and the blog stills cut from the same day). Everything below is
+    # from the supplied JUNK / Recycle Group photography.
+
+    # Facility and plant
+    "sorting-line":   (f"{SRC}/rg-sorting-line.webp", 1600, 74),
+    "intake":         (f"{SRC}/rg-intake.webp", 1600, 74),
     "facility-wide":  (f"{SRC}/facility-floor-wide.webp", 1260, 72),
     "mattress-line":  (f"{SRC}/facility-mattress-line.webp", 1260, 72),
+    "granulator":     (f"{SRC}/facility-cable-granulator.webp", 1260, 72),
     "nunjara":        (f"{SRC}/rg-nunjara-tile.webp", 918, 74),
-    "declutter-tile": (f"{SRC}/rg-declutter-tile.webp", 1200, 72),
-    "love-junk":      (f"{SRC}/community-love-junk.webp", 1400, 74),
+    "warehouse-floor":(f"{SRC}/recycle-warehouse-floor.webp", 1071, 74),
+
+    # Collection and crew
+    "junk-truck":     (f"{SRC}/junk-household-rubbish-removal-hero.webp", 1200, 66),
     "hard-waste":     (f"{SRC}/junk-hard-waste-collection-2.webp", 1260, 72),
     "fleet":          (f"{SRC}/junk-truck-fleet-numbered.webp", 1260, 72),
-    "warehouse-floor":(f"{SRC}/recycle-warehouse-floor.webp", 1071, 74),
-    "green-waste":    (f"{SRC}/junk-crew-green-waste-load.webp", 1071, 74),
     "crew-truck":     (f"{SRC}/junk-general-crew-truck-hero.webp", 1260, 72),
     "industrial":     (f"{SRC}/junk-warehouse-industrial-clearout-hero.webp", 1260, 72),
-    "mattress-crew":  (f"{SRC}/council-mattress-crew.webp", 562, 74),
     "office-carry":   (f"{SRC}/junk-crew-office-carry.webp", 1071, 74),
+    "green-waste":    (f"{SRC}/junk-crew-green-waste-load.webp", 1071, 74),
+    "volume":         (f"{SRC}/rg-volume.webp", 1600, 72),
+    "covered-truck":  (f"{SRC}/rg-covered-truck.webp", 747, 78),
+
+    # Reuse, community and brand tiles
+    "aid":            (f"{SRC}/comm-materialaid-delivery.webp", 1100, 66),
+    "sorting":        (f"{SRC}/junk-community-sorting-square.webp", 800, 66),
+    "donation-bins":  (f"{SRC}/rg-donation-bins.webp", 738, 78),
+    "love-junk":      (f"{SRC}/love-junk-card.webp", 1051, 80),
+    "love-junk-tile": (f"{SRC}/love-junk-tile.webp", 700, 80),
+    "declutter-tile": (f"{SRC}/rg-declutter-tile.webp", 1200, 72),
 }
 LOGOS = {
     "recycle-group-logo.png": f"{SRC}/recycle-group-logo.png",
@@ -108,7 +107,12 @@ def build_assets():
         if im.width > 900: im = im.resize((900, round(im.height * 900 / im.width)), Image.LANCZOS)
         im.save(f"{out}/img/{name}", "PNG", optimize=True)
     # og image = hero
-    Image.open(IMAGES["hero-mattress"][0]).convert("RGB").resize((1200, 630)).save(f"{out}/img/og.jpg", "JPEG", quality=80)
+    _og = Image.open(IMAGES["sorting-line"][0]).convert("RGB")
+    _ow = min(_og.width, round(_og.height * 1200 / 630))
+    _oh = round(_ow * 630 / 1200)
+    _og = _og.crop(((_og.width - _ow) // 2, (_og.height - _oh) // 2,
+                    (_og.width + _ow) // 2, (_og.height + _oh) // 2))
+    _og.resize((1200, 630), Image.LANCZOS).save(f"{out}/img/og.jpg", "JPEG", quality=82)
     open(f"{out}/img/favicon.svg", "w").write(FAVICON)
 
 def build_pages():

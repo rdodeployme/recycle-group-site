@@ -342,6 +342,10 @@ nav.top .nav-toggle span, nav.top .nav-toggle span::before, nav.top .nav-toggle 
 @media (max-width: 640px) { .infra .fig { grid-row: auto; grid-column: auto; } .infra .ph { grid-row: auto; grid-column: auto; } .infra p { grid-column: auto; } }
 
 .nav-links a[aria-current="page"] { border-bottom-color: var(--green-ink); color: var(--green-ink); }
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1400px) { .nav-links { gap: 22px; font-size: 12px; } }
+@media (max-width: 1180px) { .nav-links { gap: 16px; font-size: 11.5px; letter-spacing: .04em; } .nav-cta { padding: 10px 14px; font-size: 11px; } }
+#view-impact header { border-bottom: 1px solid var(--line); }
 .page-head + .sec:not(.dark) { padding-top: 0; }
 h1.h2 { max-width: 16ch; }
 .sector-row { grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.5fr); }

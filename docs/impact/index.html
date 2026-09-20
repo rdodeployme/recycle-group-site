@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact dashboard — Recycle Group</title>
+<meta name="description" content="Recycle Group designs, operates and reports recycling programs for councils, corporations and ASX-listed companies — on its own collection, transfer, processing and reuse infrastructure.">
+<meta property="og:title" content="Impact dashboard — Recycle Group">
+<meta property="og:description" content="Recycle Group designs, operates and reports recycling programs for councils, corporations and ASX-listed companies — on its own collection, transfer, processing and reuse infrastructure.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/recycle-group-site/css/main.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0B0B'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='14' font-weight='700' text-anchor='middle' fill='%23F4F4F2'%3ER%3Ctspan fill='%233C9A5F'%3EG%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<style>
+
+#view-impact{background:#0B0B0B;color:#F4F4F2;font-family:"Inter",-apple-system,sans-serif;font-size:15px;line-height:1.55;overflow-x:hidden}
+#view-impact svg.chart{overflow:hidden}
+/* neutralise the home page's .hero rules on the dashboard's hero KPI tile */
+#view-impact .kpi.hero{position:relative;min-height:0;padding:24px 22px 22px;display:block;flex-direction:row;justify-content:flex-start;overflow:visible;animation:none}
+#view-impact .kpi.hero::before{content:none}
+#view-impact .kpi.hero::after{content:none}
+#view-impact{
+  --black: #0B0B0B;
+  --surface-1: #161616;      
+  --surface-2: #1F1F1F;
+  --green: #3C9A5F;
+  --green-2: #2C7A4B;
+  --green-3: #1B5C37;
+  --neutral: #8a8a8a;        
+
+  --text-primary: #F4F4F2;
+  --text-secondary: #c9c9c9;
+  --text-muted: #8f8f8f;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --grid: rgba(255, 255, 255, 0.07);
+
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --display: "Archivo", -apple-system, sans-serif;
+  --mono: "Archivo", -apple-system, sans-serif;
+}#view-impact *{ box-sizing: border-box; margin: 0; padding: 0; }#view-impact{
+  font-family: var(--sans);
+  background: var(--black);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}#view-impact :focus-visible{ outline: 3px solid var(--green); outline-offset: 2px; }#view-impact header{
+  border-bottom: 1px solid var(--line);
+  padding: 22px clamp(22px, 5.5vw, 104px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}#view-impact .brand{ display: flex; align-items: center; gap: 14px; min-height: 44px; }#view-impact .brand-mark{
+  width: 38px; height: 38px; background: #F4F4F2; color: var(--black);
+  display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 13px;
+  flex-shrink: 0;
+}#view-impact .brand-name{ font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; }#view-impact .brand-sub{ font-size: 13px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }#view-impact .freshness{ display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }#view-impact .pulse{ width: 8px; height: 8px; border-radius: 50%; background: var(--green);  flex-shrink: 0; }#view-impact .demo-flag{
+  font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--text-muted); border: 1px solid var(--line-strong);
+  border-radius: 2px; padding: 4px 9px;
+}#view-impact .controls{
+  display: flex; gap: 28px; align-items: flex-end; flex-wrap: wrap;
+  padding: 26px clamp(22px, 5.5vw, 104px); border-bottom: 1px solid var(--line);
+}#view-impact .control-group{ display: flex; flex-direction: column; gap: 9px; }#view-impact .control-label{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }#view-impact .chips{ display: flex; gap: 6px; flex-wrap: wrap; }#view-impact .chip{
+  font-family: var(--mono); font-weight: 600; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 9px 14px; background: transparent;
+  border: 1px solid var(--line-strong); color: var(--text-secondary);
+  cursor: pointer; transition: all 0.18s;
+}#view-impact .chip:hover{ border-color: var(--green); color: var(--text-primary); }#view-impact .chip[aria-pressed="true"]{ background: #F4F4F2; border-color: #F4F4F2; color: var(--black); }#view-impact .spacer{ flex: 1; }#view-impact main{ padding: clamp(28px, 4vw, 56px) clamp(22px, 5.5vw, 104px); max-width: 1760px; margin: 0 auto; }#view-impact .grid{ display: grid; gap: 16px; }#view-impact .kpis{ grid-template-columns: repeat(4, minmax(0,1fr)); margin-bottom: 16px; }#view-impact .split{ grid-template-columns: 1.35fr 1fr; margin-top: 16px; }#view-impact .thirds{ grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 16px; }#view-impact .kpi{ background: var(--surface-1); border: 1px solid var(--line); padding: 26px 24px 24px; position: relative; }#view-impact .kpi.hero{ background: #166534; color: #F4F4F2; border-color: #166534; }#view-impact .kpi-label{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }#view-impact .kpi.hero .kpi-label{ color: #F4F4F2; opacity: 0.72; }#view-impact .kpi-value{ font-family: var(--display); font-weight: 800; font-size: clamp(34px, 4.1vw, 62px); line-height: 1; letter-spacing: -0.04em; margin-top: 16px; }#view-impact .kpi.hero .kpi-value{ font-size: clamp(42px, 5vw, 76px); }#view-impact .kpi-value .u{ font-size: 24px; margin-left: 3px; letter-spacing: 0; }#view-impact .kpi-foot{ margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.45; }#view-impact .kpi.hero .kpi-foot{ border-color: rgba(244,244,242,0.3); color: #F4F4F2; }#view-impact .delta{ font-family: var(--mono); font-weight: 600; font-size: 12px; font-weight: 700; }#view-impact .delta.up::before{ content: "▲ "; }#view-impact .delta.down::before{ content: "▼ "; }#view-impact .panel{ background: var(--surface-1); border: 1px solid var(--line); padding: 26px 24px 20px; }#view-impact .panel-head{ display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }#view-impact .panel-title{ font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: -0.01em; }#view-impact .panel-sub{ font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500; line-height: 1.5; max-width: 620px; }#view-impact .panel-meta{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }#view-impact .legend{ display: flex; gap: 18px; flex-wrap: wrap; margin: 18px 0 4px; }#view-impact .legend-item{ display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); font-weight: 600; }#view-impact .swatch{ width: 12px; height: 12px; flex-shrink: 0; }#view-impact .chart-wrap{ position: relative; margin-top: 14px; }#view-impact svg.chart{ display: block; width: 100%; overflow: visible; }#view-impact svg.chart text{ font-family: var(--mono); font-weight: 600; }#view-impact .tip{
+  position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.12s;
+  background: var(--black); border: 1px solid var(--green); padding: 12px 14px;
+  min-width: 180px; z-index: 20; box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}#view-impact .tip.on{ opacity: 1; }#view-impact .tip-h{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 9px; }#view-impact .tip-row{ display: flex; justify-content: space-between; gap: 18px; font-size: 12px; padding: 3px 0; }#view-impact .tip-row .k{ display: flex; align-items: center; gap: 7px; color: var(--text-secondary); }#view-impact .tip-row .v{ font-family: var(--mono); font-weight: 600; font-weight: 700; color: var(--text-primary); }#view-impact .tip-total{ margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }#view-impact .milestone{ background: var(--surface-1); border: 1px solid var(--line); padding: 26px 24px; transition: border-color 0.25s, transform 0.25s; }#view-impact .milestone:hover{ border-color: var(--green); transform: translateY(-3px); }#view-impact .milestone-tag{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }#view-impact .milestone-num{ font-family: var(--display); font-weight: 800; font-size: clamp(30px, 3.4vw, 50px); line-height: 1; letter-spacing: -0.035em; margin-top: 18px; }#view-impact .milestone-num .u{ font-size: 20px; margin-left: 4px; }#view-impact .milestone-label{ font-size: 14px; font-weight: 600; margin-top: 12px; }#view-impact .milestone-note{ font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }#view-impact .table-toggle{
+  font-family: var(--mono); font-weight: 600; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 10px 16px; background: transparent;
+  border: 1px solid var(--line-strong); color: var(--text-secondary); cursor: pointer; transition: all 0.18s;
+}#view-impact .table-toggle:hover{ border-color: var(--green); color: var(--text-primary); }#view-impact .tables{ margin-top: 16px; display: none; }#view-impact .tables.on{ display: block; }#view-impact table{ width: 100%; border-collapse: collapse; font-size: 13px; }#view-impact caption{ text-align: left; font-family: var(--display); font-weight: 800; font-size: 15px; text-transform: uppercase; padding: 6px 0 14px; }#view-impact th, #view-impact td{ text-align: right; padding: 9px 12px; border-bottom: 1px solid var(--line); }#view-impact th:first-child, #view-impact td:first-child{ text-align: left; }#view-impact thead th{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }#view-impact tbody td{ font-family: var(--mono); font-weight: 600; color: var(--text-secondary); }#view-impact tbody td:first-child{ font-family: var(--sans); font-weight: 600; color: var(--text-primary); }#view-impact .provenance{ margin-top: 16px; background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); padding: 30px 28px; }#view-impact .prov-title{ font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; margin-bottom: 18px; }#view-impact .prov-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }#view-impact .prov-h{ font-family: var(--mono); font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }#view-impact .prov-p{ font-size: 14px; line-height: 1.6; color: var(--text-secondary); font-weight: 500; }#view-impact .prov-p strong{ color: var(--text-primary); }#view-impact footer{ padding: 56px clamp(22px, 5.5vw, 104px) 72px; border-top: 1px solid var(--line); margin-top: 40px; }#view-impact .foot-meta{ font-family: var(--mono); font-weight: 600; font-size: 11px; color: var(--text-muted); line-height: 1.9; letter-spacing: 0.03em; }
+
+
+@media (max-width: 900px) {#view-impact .kpis{ grid-template-columns: repeat(2, 1fr); }#view-impact .split{ grid-template-columns: 1fr; }#view-impact .prov-grid{ grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 700px) {#view-impact .thirds{ grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {#view-impact header, #view-impact .controls, #view-impact main, #view-impact footer{ padding-left: 18px; padding-right: 18px; }#view-impact .kpis{ grid-template-columns: 1fr; }#view-impact .kpi-value{ font-size: 52px; }#view-impact .kpi.hero .kpi-value{ font-size: 62px; }#view-impact .controls{ gap: 20px; }
+}
+@media (hover: none) and (pointer: coarse) {#view-impact .chip{ padding: 13px 16px; }#view-impact .table-toggle{ padding: 14px 18px; }
+}#view-impact g.focusable{transition:opacity .18s ease}#view-impact svg.chart:hover g.focusable{opacity:.42}#view-impact svg.chart:hover g.focusable:hover{opacity:1}#view-impact .spark{display:block;width:100%;height:30px;margin-top:12px;overflow:visible}#view-impact .kpi.hero .spark polyline{stroke:#F4F4F2}#view-impact .kpi.hero .spark polygon{fill:rgba(244,244,242,.14)}#view-impact .ctn-row{display:flex;gap:4px;margin-top:14px;height:14px}#view-impact .ctn{flex:0 0 20px;height:14px;border:1px solid var(--line-strong);position:relative;overflow:hidden}#view-impact .ctn i{position:absolute;inset:0;background:var(--green);transform-origin:left center}#view-impact .perday{font-weight:500;color:var(--text-muted);font-size:12px;white-space:nowrap}#view-impact .fx{opacity:0;transform:translateY(12px)}#view-impact .fx.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0ms)}
+
+@media (prefers-reduced-motion: reduce) {#view-impact .fx{opacity:1;transform:none;transition:none}#view-impact *, #view-impact *::before, #view-impact *::after{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+
+</style>
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <a href="/recycle-group-site/" class="logo" aria-label="Recycle Group home"><img class="logo-img" src="/recycle-group-site/img/recycle-group-logo.png" alt="Recycle Group"></a>
+    <div class="nav-links" id="navLinks"><a href="/recycle-group-site/solutions/">Solutions</a><a href="/recycle-group-site/who-we-work-with/">Who we work with</a><a href="/recycle-group-site/infrastructure/">Infrastructure</a><a href="/recycle-group-site/reporting/">Reporting</a><a href="/recycle-group-site/about/">About</a><a href="/recycle-group-site/the-group/">The group</a><a href="/recycle-group-site/contact/">Contact</a></div>
+    <div class="nav-right">
+      <a href="/recycle-group-site/contact/" class="btn btn-solid nav-cta">Talk to us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div id="view-impact">
+
+
+<header>
+  <a class="brand" href="/recycle-group-site/" style="color:inherit; text-decoration:none;">
+    <div class="brand-mark">R<b style="color:#3C9A5F">G</b></div>
+    <div>
+      <div class="brand-name">Recycle Group</div>
+      <div class="brand-sub">Impact &amp; diversion reporting</div>
+    </div>
+  </a>
+  <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+    <a href="/recycle-group-site/" style="font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--green); text-decoration:none; border-bottom:1px solid var(--green); display:inline-flex; align-items:center; min-height:44px;">← Back to Recycle Group</a>
+    <span class="demo-flag">Demo data</span>
+    <div class="freshness"><span class="pulse"></span><span id="freshness">Last depot sync — loading…</span></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="control-group">
+    <span class="control-label" id="lbl-period">Reporting period</span>
+    <div class="chips" role="group" aria-labelledby="lbl-period" id="periodChips">
+      <button class="chip" data-period="6" aria-pressed="false">6 months</button>
+      <button class="chip" data-period="12" aria-pressed="true">12 months</button>
+      <button class="chip" data-period="24" aria-pressed="false">24 months</button>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label" id="lbl-region">Region</span>
+    <div class="chips" role="group" aria-labelledby="lbl-region" id="regionChips">
+      <button class="chip" data-region="ALL" aria-pressed="true">Both</button>
+      <button class="chip" data-region="MEL" aria-pressed="false">Melbourne</button>
+      <button class="chip" data-region="BNE" aria-pressed="false">Brisbane</button>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="control-group">
+    <span class="control-label">Data</span>
+    <div class="chips">
+      <button class="table-toggle" id="tableToggle" aria-expanded="false" aria-controls="tables">View as tables</button>
+      <button class="table-toggle" id="csvBtn">Download CSV</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- KPI ROW -->
+  <div class="grid kpis">
+    <div class="kpi hero">
+      <div class="kpi-label">Diversion rate — period</div>
+      <div class="kpi-value" id="kpiRate">—<span class="u">%</span></div>
+      <svg class="spark" id="spkRate" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="kpi-foot">Reused, recycled or repurposed. <span class="delta" id="kpiRateDelta"></span> on prior period.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Material handled</div>
+      <div class="kpi-value" id="kpiTonnes">—<span class="u">t</span></div>
+      <svg class="spark" id="spkTonnes" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="kpi-foot">Weighed across the depot network. <span class="delta" id="kpiTonnesDelta"></span> on prior period.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Diverted from landfill</div>
+      <div class="kpi-value" id="kpiDiverted">—<span class="u">t</span></div>
+      <svg class="spark" id="spkDiverted" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="kpi-foot">Material that never reached a hole in the ground.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Residual to landfill</div>
+      <div class="kpi-value" id="kpiResidual">—<span class="u">t</span></div>
+      <svg class="spark" id="spkResidual" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="kpi-foot">Contaminated, bonded or non-recoverable. Published, not netted off.</div>
+    </div>
+  </div>
+
+  <!-- TREND -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="panel-title">Monthly diversion rate</h2>
+        <p class="panel-sub">Share of collected material reused, recycled or repurposed. Dashed line is the group target of 95%. Months below target are published as recorded.</p>
+      </div>
+      <span class="panel-meta" id="trendMeta"></span>
+    </div>
+    <div class="chart-wrap">
+      <svg class="chart" id="trendChart" height="300" role="img" aria-label="Line chart of monthly landfill diversion rate against a 95% target."></svg>
+      <div class="tip" id="trendTip"></div>
+    </div>
+  </section>
+
+  <div class="grid split">
+    <!-- HIERARCHY -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">Where it actually went</h2>
+          <p class="panel-sub">Every load split by outcome under the waste hierarchy. Tonnes per month.</p>
+        </div>
+      </div>
+      <div class="legend" id="hierLegend"></div>
+      <div class="chart-wrap">
+        <svg class="chart" id="hierChart" height="300" role="img" aria-label="Stacked bar chart of monthly tonnes by outcome: reused, recycled, repurposed and residual."></svg>
+        <div class="tip" id="hierTip"></div>
+      </div>
+    </section>
+
+    <!-- STREAMS -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">By material stream</h2>
+          <p class="panel-sub">Tonnes recovered over the selected period.</p>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="streamChart" height="360" role="img" aria-label="Horizontal bar chart of tonnes recovered by material stream."></svg>
+        <div class="tip" id="streamTip"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- REGIONS -->
+  <section class="panel" style="margin-top:16px;">
+    <div class="panel-head">
+      <div>
+        <h2 class="panel-title">By market</h2>
+        <p class="panel-sub">Tonnes handled and diversion rate per JUNK market. Bar length is volume; the figure on the right is that market's diversion rate. JUNK currently services Melbourne and Brisbane.</p>
+      </div>
+      <span class="panel-meta">Melbourne · Brisbane</span>
+    </div>
+    <div class="chart-wrap">
+      <svg class="chart" id="regionChart" height="300" role="img" aria-label="Horizontal bar chart of tonnes handled by market with diversion rate labels."></svg>
+      <div class="tip" id="regionTip"></div>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <div class="grid thirds">
+    <div class="milestone">
+      <div class="milestone-tag">Mattresses · TMRC</div>
+      <div class="milestone-num" id="msMattress">—</div>
+      <div class="milestone-label">Mattresses processed this period <span class="perday" id="msPerDay"></span></div>
+      <div class="milestone-note">Stripped on site: steel to the smelter, foam to carpet underlay, timber to mulch.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-tag">Polystyrene · Styro</div>
+      <div class="milestone-num" id="msPoly">—<span class="u">m³</span></div>
+      <div class="milestone-label">EPS saved from landfill</div>
+      <div class="milestone-note">Densified and reprocessed. One 40 ft container of processed EPS represents 6,930 m³.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-tag">Equivalent</div>
+      <div class="milestone-num" id="msContainers">—</div>
+      <div class="ctn-row" id="ctnRow" aria-hidden="true"></div>
+      <div class="milestone-label">40 ft containers of EPS</div>
+      <div class="milestone-note">Volume that would otherwise have been buried, expressed as shipping containers.</div>
+    </div>
+  </div>
+
+  <!-- TABLES -->
+  <div class="tables" id="tables">
+    <section class="panel" style="margin-top:0;">
+      <table id="tblMonthly"><caption>Monthly diversion — selected period</caption></table>
+    </section>
+    <div class="grid split" style="margin-top:16px;">
+      <section class="panel"><table id="tblStreams"><caption>Material streams</caption></table></section>
+      <section class="panel"><table id="tblRegions"><caption>Markets</caption></table></section>
+    </div>
+  </div>
+
+  <!-- PROVENANCE -->
+  <section class="provenance">
+    <h2 class="prov-title">How these numbers are produced</h2>
+    <div class="prov-grid">
+      <div>
+        <div class="prov-h">Measured, not modelled</div>
+        <p class="prov-p">Every vehicle is weighed in and out at a Recycle Group transfer station. Loads are split at the sorting line and each stream is weighed again before it leaves. The diversion rate is <strong>recovered tonnes divided by received tonnes</strong> — no estimates, no conversion factors.</p>
+      </div>
+      <div>
+        <div class="prov-h">Why we can show this</div>
+        <p class="prov-p">Most operators collect and hand off, so the chain of custody ends at the gate. Recycle Group owns collection, transfer, processing and re-use retail, so <strong>material stays inside the group until it becomes something else</strong>. That is what makes the number verifiable.</p>
+      </div>
+      <div>
+        <div class="prov-h">What we exclude</div>
+        <p class="prov-p">Asbestos and hazardous waste are <strong>not accepted</strong> and never enter these figures. Residual is reported in full rather than netted off. Client-level diversion statements are available to commercial and council partners on request.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="foot-meta">
+    DEMO BUILD — all figures on this page are illustrative sample data.<br>
+    Replace the <code>RAW</code> object in the page source with a live feed from the weighbridge system to make this real.<br>
+    © 2026 Recycle Group Pty Ltd · Diversion methodology available on request.
+  </p>
+</footer>
+
+
+</div>
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="/recycle-group-site/" class="logo"><img class="logo-img" src="/recycle-group-site/img/recycle-group-logo.png" alt="Recycle Group"></a>
+        <p class="foot-desc">Recycling solutions for councils, corporations and listed companies — designed, operated and reported on the group's own collection, transfer, processing and reuse infrastructure.</p>
+      </div>
+      <div>
+        <div class="foot-h">Company</div>
+        <ul class="foot-list">
+          <li><a href="/recycle-group-site/solutions/">Solutions</a></li>
+          <li><a href="/recycle-group-site/who-we-work-with/">Who we work with</a></li>
+          <li><a href="/recycle-group-site/infrastructure/">Infrastructure</a></li>
+          <li><a href="/recycle-group-site/reporting/">Reporting</a></li>
+          <li><a href="/recycle-group-site/about/">Leadership</a></li>
+          <li><a href="/recycle-group-site/the-group/">The group's brands</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Sectors</div>
+        <ul class="foot-list">
+          <li><a href="/recycle-group-site/who-we-work-with/">Councils &amp; government</a></li>
+          <li><a href="/recycle-group-site/who-we-work-with/">Corporations &amp; multi-site</a></li>
+          <li><a href="/recycle-group-site/who-we-work-with/">ASX-listed companies</a></li>
+          <li><a href="/recycle-group-site/who-we-work-with/">Property &amp; construction</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <ul class="foot-list">
+          <li><a href="mailto:info@recycle.net.au">info@recycle.net.au</a></li>
+          <li><a href="tel:0460555222">0460 555 222</a></li>
+          <li>116 Furner Avenue, North Geelong VIC 3215</li>
+          <li><a href="/recycle-group-site/impact/">Impact dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span>© 2026 Recycle Group Pty Ltd</span>
+      <span>Privacy · Terms · Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+(function () {
+  var t = document.getElementById('navToggle'); var l = document.getElementById('navLinks');
+  if (!t || !l) return;
+  t.addEventListener('click', function () { var open = l.classList.toggle('open'); t.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+})();
+</script>
+<script>
+
+/* ================================================================
+   1. DATA LAYER
+   ----------------------------------------------------------------
+   THIS IS THE ONLY BLOCK THAT NEEDS TO CHANGE TO GO LIVE.
+   Swap `RAW` for a fetch() against the weighbridge / ERP export.
+   Expected shape is documented inline below — everything downstream
+   reads from this object only.
+   ================================================================ */
+
+const RAW = {
+  // ISO month → tonnes by outcome. reused+recycled+repurposed+residual = received
+  months: [
+    // [month,      reused, recycled, repurposed, residual]
+    ["2024-09",  318, 1402, 286,  104],
+    ["2024-10",  341, 1488, 301,  112],
+    ["2024-11",  356, 1544, 312,  118],
+    ["2024-12",  392, 1671, 334,  141],
+    ["2025-01",  301, 1330, 271,  126],
+    ["2025-02",  312, 1372, 279,  108],
+    ["2025-03",  349, 1519, 308,   99],
+    ["2025-04",  361, 1566, 318,   94],
+    ["2025-05",  372, 1601, 325,  102],
+    ["2025-06",  358, 1547, 314,   96],
+    ["2025-07",  366, 1583, 321,   88],
+    ["2025-08",  381, 1644, 333,   91],
+    ["2025-09",  388, 1672, 339,   86],
+    ["2025-10",  402, 1731, 351,   89],
+    ["2025-11",  414, 1784, 362,   93],
+    ["2025-12",  448, 1922, 389,  118],
+    ["2026-01",  356, 1541, 313,  102],
+    ["2026-02",  369, 1594, 324,   87],
+    ["2026-03",  407, 1748, 355,   81],
+    ["2026-04",  421, 1806, 367,   78],
+    ["2026-05",  433, 1859, 377,   83],
+    ["2026-06",  418, 1794, 364,   74],
+    ["2026-07",  437, 1874, 380,   71],
+    ["2026-08",  452, 1938, 393,   76]
+  ],
+  // Region share of group volume + that region's own diversion rate
+  regions: [
+    { code: "MEL", name: "Melbourne", share: 0.54, rate: 96.8 },
+    { code: "BNE", name: "Brisbane",  share: 0.46, rate: 96.4 }
+  ],
+  // Share of total recovered tonnage by material stream
+  streams: [
+    { name: "Timber & pallets",      share: 0.213 },
+    { name: "Metals & steel",        share: 0.164 },
+    { name: "Mattresses",            share: 0.148 },
+    { name: "Concrete & rubble",     share: 0.131 },
+    { name: "Cardboard & paper",     share: 0.097 },
+    { name: "Green waste",           share: 0.089 },
+    { name: "Furniture & homewares", share: 0.071 },
+    { name: "Polystyrene (EPS)",     share: 0.048 },
+    { name: "E-waste",               share: 0.039 }
+  ],
+  // Conversion constants — confirm before live use
+  mattressKg: 18.1,      // avg mattress weight — CONFIRM. Tuned so the 12-month demo lands on ~250,000 units/yr
+  epsM3PerTonne: 28.4,   // EPS m3 per tonne — CONFIRM. Tuned so the 12-month demo lands on ~41,580 m3/yr
+  epsM3PerContainer: 6930,
+  lastSync: "2026-08-17T05:40:00+10:00"
+};
+
+/* ================================================================
+   2. COLOUR ROLES  (see palette note in the stylesheet)
+   ================================================================ */
+const C = {
+  green:   "#4FAE72",
+  green2:  "#2C7A4B",
+  green3:  "#1B5C37",
+  neutral: "#8a8a8a",
+  grid:    "rgba(255,255,255,0.07)",
+  axis:    "#8f8f8f",
+  text:    "#F4F4F2",
+  surface: "#161616"
+};
+const OUTCOMES = [
+  { key: "reused",     label: "Reused",     color: C.green,   note: "Resold, rehomed or donated" },
+  { key: "recycled",   label: "Recycled",   color: C.green2,  note: "Back to raw material" },
+  { key: "repurposed", label: "Repurposed", color: C.green3,  note: "New life, new product" },
+  { key: "residual",   label: "Residual",   color: C.neutral, note: "To landfill" }
+];
+
+/* ================================================================
+   3. STATE + DERIVATION
+   ================================================================ */
+let state = { period: 12, region: "ALL" };
+
+const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmt  = n => Math.round(n).toLocaleString("en-AU");
+const fmt1 = n => n.toFixed(1);
+const labelFor = iso => {
+  const [y, m] = iso.split("-");
+  return MONTH_NAMES[+m - 1] + " " + y.slice(2);
+};
+
+function series() {
+  const rows = RAW.months.map(([month, reused, recycled, repurposed, residual]) => {
+    let f = 1, rateAdj = 0;
+    if (state.region !== "ALL") {
+      const r = RAW.regions.find(x => x.code === state.region);
+      f = r.share;
+      // shift the recovered/residual split to match that region's own rate
+      rateAdj = r.rate - 96.0;
+    }
+    let rec = (reused + recycled + repurposed) * f;
+    let res = residual * f;
+    const total = rec + res;
+    // re-balance to the region's diversion rate without changing total volume
+    if (rateAdj !== 0) {
+      const targetRec = total * ((96.0 + rateAdj) / 100);
+      const scale = targetRec / rec;
+      rec = targetRec; res = total - targetRec;
+      return {
+        month, label: labelFor(month),
+        reused: reused * f * scale, recycled: recycled * f * scale,
+        repurposed: repurposed * f * scale, residual: res, total,
+        rate: (rec / total) * 100
+      };
+    }
+    return {
+      month, label: labelFor(month),
+      reused: reused * f, recycled: recycled * f,
+      repurposed: repurposed * f, residual: res, total,
+      rate: (rec / total) * 100
+    };
+  });
+  const cur = rows.slice(-state.period);
+  const prev = rows.slice(-state.period * 2, -state.period);
+  return { cur, prev: prev.length ? prev : null };
+}
+
+const sum = (a, k) => a.reduce((s, r) => s + r[k], 0);
+const rateOf = a => {
+  const t = sum(a, "total");
+  return t ? ((t - sum(a, "residual")) / t) * 100 : 0;
+};
+
+/* ================================================================
+   4. SVG HELPERS
+   ================================================================ */
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, attrs = {}) => {
+  const e = document.createElementNS(NS, n);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+};
+const txt = (x, y, s, o = {}) => {
+  const t = el("text", {
+    x, y,
+    fill: o.fill || C.axis,
+    "font-size": o.size || 10,
+    "font-weight": o.weight || 500,
+    "letter-spacing": o.ls || 0.6,
+    "text-anchor": o.anchor || "start",
+    "dominant-baseline": o.baseline || "auto"
+  });
+  t.textContent = s;
+  return t;
+};
+function frame(svg) {
+  svg.innerHTML = "";
+  const w = svg.clientWidth || svg.parentNode.clientWidth || 900;
+  const h = +svg.getAttribute("height");
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  return { w, h };
+}
+function tipAt(tip, wrap, cx, cy, html) {
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  const bw = wrap.clientWidth, tw = tip.offsetWidth, th = tip.offsetHeight;
+  let x = cx + 16;
+  if (x + tw > bw) x = cx - tw - 16;
+  tip.style.left = Math.max(0, x) + "px";
+  tip.style.top = Math.max(0, cy - th / 2) + "px";
+}
+const hideTip = t => t.classList.remove("on");
+
+/* ================================================================
+   4b. MOTION HELPERS
+   Every animation funnels through these two, so reduced-motion,
+   resize re-renders and no-JS all behave from one switch.
+   ================================================================ */
+const ANIM = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+let RENDER_ANIM = true;          // false on resize re-renders
+
+function popIn(elm, axis, delay) {
+  if (!ANIM || !RENDER_ANIM) return;
+  elm.style.transformBox = "fill-box";
+  elm.style.transformOrigin = axis === "y" ? "center bottom" : "left center";
+  elm.style.transform = axis === "y" ? "scaleY(0.001)" : "scaleX(0.001)";
+  elm.style.transition = "transform .6s cubic-bezier(.16,1,.3,1) " + delay + "ms";
+  requestAnimationFrame(() => requestAnimationFrame(() => { elm.style.transform = "scale(1,1)"; }));
+}
+
+const prevVals = {};
+function setNum(id, val, format, suffix) {
+  const e = document.getElementById(id);
+  suffix = suffix || "";
+  if (!ANIM || !RENDER_ANIM) { prevVals[id] = val; e.innerHTML = format(val) + suffix; return; }
+  const from = prevVals[id] !== undefined ? prevVals[id] : 0;
+  prevVals[id] = val;
+  if (from === val) { e.innerHTML = format(val) + suffix; return; }
+  const t0 = performance.now(), dur = 680;
+  (function step(t) {
+    const q = Math.min((t - t0) / dur, 1), ease = 1 - Math.pow(1 - q, 3);
+    e.innerHTML = format(from + (val - from) * ease) + suffix;
+    if (q < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+/* ---- KPI sparklines: 120x30 user units, stretched to the tile ---- */
+function drawSpark(id, vals, color, opts) {
+  const svg = document.getElementById(id);
+  if (!svg) return;
+  svg.innerHTML = "";
+  if (vals.length < 2) return;
+  opts = opts || {};
+  const lo = Math.min(...vals), hi = Math.max(...vals), span = (hi - lo) || 1;
+  const X = i => (i / (vals.length - 1)) * 120;
+  const Y = v => 27 - ((v - lo) / span) * 24;
+  const ptStr = vals.map((v, i) => X(i).toFixed(1) + "," + Y(v).toFixed(1)).join(" ");
+  if (!opts.noFill) {
+    const poly = el("polygon", { points: ptStr + " 120,30 0,30", fill: color, opacity: 0.12 });
+    svg.appendChild(poly);
+  }
+  const line = el("polyline", {
+    points: ptStr, fill: "none", stroke: color, "stroke-width": 1.6,
+    "vector-effect": "non-scaling-stroke", "stroke-linejoin": "round", "stroke-linecap": "round"
+  });
+  svg.appendChild(line);
+  if (ANIM && RENDER_ANIM) {
+    svg.style.clipPath = "inset(-4px 100% -4px 0)";
+    svg.style.transition = "clip-path .8s cubic-bezier(.4,0,.2,1) .15s";
+    requestAnimationFrame(() => requestAnimationFrame(() => { svg.style.clipPath = "inset(-4px 0 -4px 0)"; }));
+  } else {
+    svg.style.clipPath = "none";
+    svg.style.transition = "none";
+  }
+}
+
+/* ---- container pictogram: one block per 40 ft container ---- */
+function drawContainers(n) {
+  const row = document.getElementById("ctnRow");
+  if (!row) return;
+  row.innerHTML = "";
+  const cap = 14;
+  const whole = Math.floor(n), frac = n - whole;
+  const blocks = Math.min(whole + (frac > 0.04 ? 1 : 0), cap);
+  for (let i = 0; i < blocks; i++) {
+    const b = document.createElement("span"); b.className = "ctn";
+    const f = document.createElement("i");
+    const fill = i < whole ? 1 : frac;
+    f.style.transform = "scaleX(" + fill + ")";
+    if (ANIM && RENDER_ANIM) {
+      f.style.transform = "scaleX(0)";
+      f.style.transition = "transform .45s cubic-bezier(.16,1,.3,1) " + (i * 55) + "ms";
+      requestAnimationFrame(() => requestAnimationFrame(() => { f.style.transform = "scaleX(" + fill + ")"; }));
+    }
+    b.appendChild(f); row.appendChild(b);
+  }
+  if (whole + (frac > 0.04 ? 1 : 0) > cap) {
+    const more = document.createElement("span");
+    more.className = "perday"; more.textContent = "+" + (whole - cap) + " more";
+    row.appendChild(more);
+  }
+}
+
+/* ================================================================
+   5. CHART — monthly diversion rate (single series + target rule)
+   ================================================================ */
+function drawTrend(data) {
+  const svg = document.getElementById("trendChart");
+  const wrap = svg.parentNode, tip = document.getElementById("trendTip");
+  const { w, h } = frame(svg);
+  const M = { t: 18, r: 20, b: 34, l: 46 };
+  const iw = w - M.l - M.r, ih = h - M.t - M.b;
+
+  const lo = Math.min(90, Math.floor(Math.min(...data.map(d => d.rate)) - 1.5));
+  const hi = 100;
+  const X = i => M.l + (data.length === 1 ? iw / 2 : (i / (data.length - 1)) * iw);
+  const Y = v => M.t + ih - ((v - lo) / (hi - lo)) * ih;
+
+  // grid + y labels
+  const ticks = 5;
+  for (let i = 0; i <= ticks; i++) {
+    const v = lo + ((hi - lo) / ticks) * i, y = Y(v);
+    svg.appendChild(el("line", { x1: M.l, y1: y, x2: w - M.r, y2: y, stroke: C.grid, "stroke-width": 1 }));
+    svg.appendChild(txt(M.l - 10, y, fmt1(v) + "%", { anchor: "end", baseline: "middle", size: 10 }));
+  }
+
+  // target rule — directly annotated, no legend needed
+  const ty = Y(95);
+  svg.appendChild(el("line", { x1: M.l, y1: ty, x2: w - M.r, y2: ty, stroke: C.neutral, "stroke-width": 1.5, "stroke-dasharray": "5 5" }));
+  svg.appendChild(txt(w - M.r, ty - 8, "TARGET 95%", { anchor: "end", size: 9, fill: C.neutral, ls: 1.2, weight: 700 }));
+
+  // area + line
+  const pts = data.map((d, i) => [X(i), Y(d.rate)]);
+  const gid = "gTrend";
+  const defs = el("defs");
+  const g = el("linearGradient", { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 });
+  g.appendChild(el("stop", { offset: "0%",   "stop-color": C.green, "stop-opacity": 0.28 }));
+  g.appendChild(el("stop", { offset: "100%", "stop-color": C.green, "stop-opacity": 0 }));
+  defs.appendChild(g); svg.appendChild(defs);
+
+  const area = el("path", {
+    d: `M${pts.map(p => p.join(",")).join(" L")} L${pts[pts.length-1][0]},${M.t+ih} L${pts[0][0]},${M.t+ih} Z`,
+    fill: `url(#${gid})`
+  });
+  svg.appendChild(area);
+  const line = el("path", {
+    d: `M${pts.map(p => p.join(",")).join(" L")}`,
+    fill: "none", stroke: C.green, "stroke-width": 2,
+    "stroke-linejoin": "round", "stroke-linecap": "round"
+  });
+  svg.appendChild(line);
+  if (ANIM && RENDER_ANIM) {
+    const len = line.getTotalLength();
+    line.style.strokeDasharray = len;
+    line.style.strokeDashoffset = len;
+    line.style.transition = "stroke-dashoffset .95s cubic-bezier(.4,0,.2,1)";
+    area.style.opacity = 0;
+    area.style.transition = "opacity .7s ease .4s";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      line.style.strokeDashoffset = 0;
+      area.style.opacity = 1;
+    }));
+  }
+
+  // x labels — thinned so they never collide
+  const step = Math.ceil(data.length / Math.max(4, Math.floor(iw / 74)));
+  data.forEach((d, i) => {
+    if (i % step === 0 || i === data.length - 1) {
+      svg.appendChild(txt(X(i), h - 10, d.label, { anchor: "middle", size: 10 }));
+    }
+  });
+
+  // high / low months get a direct label; nothing else does
+  if (data.length > 2) {
+    let hiI = 0, loI = 0;
+    data.forEach((d, i) => { if (d.rate > data[hiI].rate) hiI = i; if (d.rate < data[loI].rate) loI = i; });
+    if (hiI !== loI) {
+      const lab = (i, txtStr, above) => {
+        const x = Math.max(M.l + 26, Math.min(w - M.r - 26, X(i)));
+        let y = Y(data[i].rate) + (above ? -12 : 18);
+        if (Math.abs(y - ty) < 12) y = ty + (above ? -14 : 16);   // clear the target rule
+        const t = txt(x, y, txtStr, { anchor: "middle", size: 9.5, weight: 700, fill: "#c9c9c9", ls: 0.4 });
+        t.setAttribute("stroke", C.surface);                       // halo so it reads over dashes
+        t.setAttribute("stroke-width", "3");
+        t.setAttribute("paint-order", "stroke");
+        svg.appendChild(t);
+      };
+      lab(hiI, "high " + fmt1(data[hiI].rate) + "%", true);
+      lab(loI, "low " + fmt1(data[loI].rate) + "%", false);
+    }
+  }
+
+  // markers >= 8px, 2px surface ring — grey when the month missed target
+  data.forEach((d, i) => {
+    const c = el("circle", { cx: X(i), cy: Y(d.rate), r: 4.5, fill: d.rate >= 95 ? C.green : C.neutral, stroke: C.surface, "stroke-width": 2 });
+    if (ANIM && RENDER_ANIM) {
+      c.style.opacity = 0;
+      c.style.transition = "opacity .25s ease " + Math.round((i / Math.max(1, data.length - 1)) * 850) + "ms";
+      requestAnimationFrame(() => requestAnimationFrame(() => { c.style.opacity = 1; }));
+    }
+    svg.appendChild(c);
+  });
+
+  // crosshair + hover
+  const cross = el("line", { y1: M.t, y2: M.t + ih, stroke: C.green, "stroke-width": 1, opacity: 0 });
+  const dot = el("circle", { r: 6.5, fill: C.green, stroke: C.surface, "stroke-width": 2.5, opacity: 0 });
+  svg.appendChild(cross); svg.appendChild(dot);
+
+  const hit = el("rect", { x: M.l, y: M.t, width: iw, height: ih, fill: "transparent" });
+  svg.appendChild(hit);
+  hit.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect();
+    const mx = ((ev.clientX - r.left) / r.width) * w;
+    let idx = Math.round(((mx - M.l) / iw) * (data.length - 1));
+    idx = Math.max(0, Math.min(data.length - 1, idx));
+    const d = data[idx], x = X(idx), y = Y(d.rate);
+    cross.setAttribute("x1", x); cross.setAttribute("x2", x); cross.setAttribute("opacity", 0.5);
+    dot.setAttribute("cx", x); dot.setAttribute("cy", y); dot.setAttribute("opacity", 1);
+    tipAt(tip, wrap, (x / w) * wrap.clientWidth, (y / h) * 300, `
+      <div class="tip-h">${d.label}</div>
+      <div class="tip-row"><span class="k">Diversion rate</span><span class="v">${fmt1(d.rate)}%</span></div>
+      <div class="tip-row"><span class="k">Received</span><span class="v">${fmt(d.total)} t</span></div>
+      <div class="tip-row"><span class="k">Residual</span><span class="v">${fmt(d.residual)} t</span></div>
+      <div class="tip-row tip-total"><span class="k">vs target</span><span class="v" style="color:${d.rate >= 95 ? C.green : C.neutral}">${d.rate >= 95 ? "+" : ""}${fmt1(d.rate - 95)} pts</span></div>
+    `);
+  });
+  hit.addEventListener("mouseleave", () => {
+    cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); hideTip(tip);
+  });
+}
+
+/* ================================================================
+   6. CHART — outcome stack (ordinal ramp + residual status colour)
+   ================================================================ */
+function drawHierarchy(data) {
+  const svg = document.getElementById("hierChart");
+  const wrap = svg.parentNode, tip = document.getElementById("hierTip");
+  const { w, h } = frame(svg);
+  const M = { t: 14, r: 14, b: 34, l: 54 };
+  const iw = w - M.l - M.r, ih = h - M.t - M.b;
+  const max = Math.max(...data.map(d => d.total)) * 1.08;
+  const bw = Math.min(46, (iw / data.length) - 6);
+  // thin x labels to the available width so they never collide on narrow screens
+  const xStep = Math.ceil(data.length / Math.max(3, Math.floor(iw / 72)));
+
+  for (let i = 0; i <= 4; i++) {
+    const v = (max / 4) * i, y = M.t + ih - (v / max) * ih;
+    svg.appendChild(el("line", { x1: M.l, y1: y, x2: w - M.r, y2: y, stroke: C.grid, "stroke-width": 1 }));
+    svg.appendChild(txt(M.l - 10, y, fmt(v), { anchor: "end", baseline: "middle", size: 10 }));
+  }
+
+  data.forEach((d, i) => {
+    const cx = M.l + (iw / data.length) * (i + 0.5);
+    const x = cx - bw / 2;
+    let acc = 0;
+    const gp = el("g", { style: "cursor:pointer", class: "focusable" });
+    OUTCOMES.forEach((o, oi) => {
+      const val = d[o.key];
+      const segH = (val / max) * ih;
+      const y = M.t + ih - ((acc + val) / max) * ih;
+      // 2px surface gap between stacked segments; 4px rounded cap on the top segment
+      const gap = oi === 0 ? 0 : 2;
+      const r = el("rect", {
+        x, y: y + gap / 2, width: bw, height: Math.max(0, segH - gap), fill: o.color
+      });
+      if (oi === OUTCOMES.length - 1) { r.setAttribute("rx", 4); r.setAttribute("ry", 4); }
+      gp.appendChild(r);
+      acc += val;
+    });
+    const hit = el("rect", { x: cx - (iw / data.length) / 2, y: M.t, width: iw / data.length, height: ih, fill: "transparent" });
+    gp.appendChild(hit);
+    gp.addEventListener("mousemove", () => {
+      tipAt(tip, wrap, (cx / w) * wrap.clientWidth, 110, `
+        <div class="tip-h">${d.label}</div>
+        ${OUTCOMES.map(o => `<div class="tip-row"><span class="k"><span class="swatch" style="background:${o.color}"></span>${o.label}</span><span class="v">${fmt(d[o.key])} t</span></div>`).join("")}
+        <div class="tip-row tip-total"><span class="k">Received</span><span class="v">${fmt(d.total)} t</span></div>
+        <div class="tip-row"><span class="k">Diverted</span><span class="v" style="color:${C.green}">${fmt1(d.rate)}%</span></div>
+      `);
+    });
+    gp.addEventListener("mouseleave", () => hideTip(tip));
+    svg.appendChild(gp);
+    popIn(gp, "y", i * 22);
+    if (i % xStep === 0 || i === data.length - 1) {
+      svg.appendChild(txt(cx, h - 10, d.label, { anchor: "middle", size: 10 }));
+    }
+  });
+
+  const lg = document.getElementById("hierLegend");
+  lg.innerHTML = OUTCOMES.map(o =>
+    `<span class="legend-item"><span class="swatch" style="background:${o.color}"></span>${o.label}</span>`
+  ).join("");
+}
+
+/* ================================================================
+   7. CHART — material streams (single-hue magnitude)
+   ================================================================ */
+function drawStreams(data) {
+  const svg = document.getElementById("streamChart");
+  const wrap = svg.parentNode, tip = document.getElementById("streamTip");
+  const narrow = (svg.clientWidth || 900) < 520;
+  const recovered = sum(data, "total") - sum(data, "residual");
+  const rows = RAW.streams.map(s => ({ name: s.name, t: recovered * s.share }));
+  svg.setAttribute("height", narrow ? rows.length * 52 + 12 : 360);
+  const { w, h } = frame(svg);
+  const M = narrow ? { t: 6, r: 6, b: 6, l: 6 } : { t: 8, r: 76, b: 8, l: 150 };
+  const iw = w - M.l - M.r, ih = h - M.t - M.b;
+  const max = Math.max(...rows.map(r => r.t));
+  const rowH = ih / rows.length;
+  const bh = narrow ? 16 : Math.min(24, rowH - 8);
+
+  rows.forEach((r, i) => {
+    const y = narrow ? M.t + rowH * i + 24 : M.t + rowH * i + (rowH - bh) / 2;
+    const bw = (r.t / max) * iw;
+    const gp = el("g", { style: "cursor:pointer", class: "focusable" });
+    gp.appendChild(el("rect", { x: M.l, y, width: iw, height: bh, fill: "rgba(255,255,255,0.035)" }));
+    const bar = el("rect", { x: M.l, y, width: Math.max(2, bw), height: bh, fill: C.green, rx: 4, ry: 4 });
+    gp.appendChild(bar);
+    popIn(bar, "x", i * 40);
+    if (narrow) {
+      gp.appendChild(txt(M.l, y - 8, r.name, { size: 11, fill: C.text, weight: 600 }));
+      gp.appendChild(txt(w - M.r, y - 8, fmt(r.t) + " t", { anchor: "end", size: 11, fill: "#c9c9c9", weight: 700 }));
+    } else {
+      gp.appendChild(txt(M.l - 12, y + bh / 2, r.name, { anchor: "end", baseline: "middle", size: 11, fill: C.text, weight: 600 }));
+      gp.appendChild(txt(w - M.r + 10, y + bh / 2, fmt(r.t) + " t", { baseline: "middle", size: 11, fill: "#c9c9c9", weight: 700 }));
+    }
+    const hit = el("rect", { x: 0, y: y - 4, width: w, height: bh + 8, fill: "transparent" });
+    gp.appendChild(hit);
+    gp.addEventListener("mousemove", () => {
+      tipAt(tip, wrap, M.l + bw * 0.5, y + bh / 2, `
+        <div class="tip-h">${r.name}</div>
+        <div class="tip-row"><span class="k">Recovered</span><span class="v">${fmt(r.t)} t</span></div>
+        <div class="tip-row"><span class="k">Share of recovery</span><span class="v">${fmt1((r.t / recovered) * 100)}%</span></div>
+      `);
+    });
+    gp.addEventListener("mouseleave", () => hideTip(tip));
+    svg.appendChild(gp);
+  });
+}
+
+/* ================================================================
+   8. CHART — regions (single-hue magnitude + rate label)
+   ================================================================ */
+function drawRegions(data) {
+  const svg = document.getElementById("regionChart");
+  const wrap = svg.parentNode, tip = document.getElementById("regionTip");
+  const narrow = (svg.clientWidth || 900) < 520;
+  const total = sum(data, "total");
+  const scope = state.region === "ALL" ? RAW.regions : RAW.regions.filter(r => r.code === state.region);
+  const denom = scope.reduce((s, r) => s + r.share, 0);
+  const rows = scope.map(r => ({ ...r, t: total * (r.share / denom) })).sort((a, b) => b.t - a.t);
+  svg.setAttribute("height", narrow ? rows.length * 58 + 12 : 300);
+  const { w, h } = frame(svg);
+  const M = narrow ? { t: 6, r: 6, b: 6, l: 6 } : { t: 8, r: 108, b: 8, l: 150 };
+  const iw = w - M.l - M.r, ih = h - M.t - M.b;
+  const max = Math.max(...rows.map(r => r.t));
+  const rowH = ih / rows.length;
+  const bh = narrow ? 18 : Math.min(26, rowH - 8);
+
+  rows.forEach((r, i) => {
+    const y = narrow ? M.t + rowH * i + 26 : M.t + rowH * i + (rowH - bh) / 2;
+    const bw = (r.t / max) * iw;
+    const gp = el("g", { style: "cursor:pointer", class: "focusable" });
+    gp.appendChild(el("rect", { x: M.l, y, width: iw, height: bh, fill: "rgba(255,255,255,0.035)" }));
+    const bar = el("rect", { x: M.l, y, width: Math.max(2, bw), height: bh, fill: C.green, rx: 4, ry: 4 });
+    gp.appendChild(bar);
+    popIn(bar, "x", i * 60);
+    if (narrow) {
+      gp.appendChild(txt(M.l, y - 8, r.name, { size: 11, fill: C.text, weight: 600 }));
+      gp.appendChild(txt(w - M.r, y - 8, fmt(r.t) + " t · " + fmt1(r.rate) + "%", { anchor: "end", size: 11, fill: "#c9c9c9", weight: 700 }));
+    } else {
+      gp.appendChild(txt(M.l - 12, y + bh / 2, r.name, { anchor: "end", baseline: "middle", size: 11, fill: C.text, weight: 600 }));
+      gp.appendChild(txt(w - M.r + 10, y + bh / 2, fmt(r.t) + " t", { baseline: "middle", size: 11, fill: "#c9c9c9", weight: 700 }));
+      gp.appendChild(txt(w - 4, y + bh / 2, fmt1(r.rate) + "%", { anchor: "end", baseline: "middle", size: 11, fill: C.text, weight: 700 }));
+    }
+    const hit = el("rect", { x: 0, y: y - 4, width: w, height: bh + 8, fill: "transparent" });
+    gp.appendChild(hit);
+    gp.addEventListener("mousemove", () => {
+      tipAt(tip, wrap, M.l + bw * 0.5, y + bh / 2, `
+        <div class="tip-h">${r.name} · ${r.code}</div>
+        <div class="tip-row"><span class="k">Handled</span><span class="v">${fmt(r.t)} t</span></div>
+        <div class="tip-row"><span class="k">Diversion rate</span><span class="v">${fmt1(r.rate)}%</span></div>
+        <div class="tip-row tip-total"><span class="k">Residual</span><span class="v">${fmt(r.t * (1 - r.rate / 100))} t</span></div>
+      `);
+    });
+    gp.addEventListener("mouseleave", () => hideTip(tip));
+    svg.appendChild(gp);
+  });
+}
+
+/* ================================================================
+   9. TABLES  (accessibility: every chart has a data equivalent)
+   ================================================================ */
+function buildTable(id, head, rows) {
+  const t = document.getElementById(id);
+  const cap = t.querySelector("caption").outerHTML;
+  t.innerHTML = cap +
+    "<thead><tr>" + head.map(h => `<th>${h}</th>`).join("") + "</tr></thead>" +
+    "<tbody>" + rows.map(r => "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>").join("") + "</tbody>";
+}
+function drawTables(data) {
+  buildTable("tblMonthly",
+    ["Month", "Received (t)", "Reused (t)", "Recycled (t)", "Repurposed (t)", "Residual (t)", "Diversion"],
+    data.map(d => [d.label, fmt(d.total), fmt(d.reused), fmt(d.recycled), fmt(d.repurposed), fmt(d.residual), fmt1(d.rate) + "%"]));
+
+  const recovered = sum(data, "total") - sum(data, "residual");
+  buildTable("tblStreams", ["Stream", "Recovered (t)", "Share"],
+    RAW.streams.map(s => [s.name, fmt(recovered * s.share), fmt1(s.share * 100) + "%"]));
+
+  const total = sum(data, "total");
+  const scope = state.region === "ALL" ? RAW.regions : RAW.regions.filter(r => r.code === state.region);
+  const denom = scope.reduce((s, r) => s + r.share, 0);
+  buildTable("tblRegions", ["Market", "Handled (t)", "Diversion"],
+    scope.map(r => [r.name, fmt(total * (r.share / denom)), fmt1(r.rate) + "%"]));
+}
+
+/* ================================================================
+   10. RENDER
+   ================================================================ */
+function render(animate = true) {
+  RENDER_ANIM = animate;
+  const { cur, prev } = series();
+
+  const rate = rateOf(cur), tonnes = sum(cur, "total");
+  const diverted = tonnes - sum(cur, "residual");
+
+  setNum("kpiRate", rate, fmt1, '<span class="u">%</span>');
+  setNum("kpiTonnes", tonnes, fmt, '<span class="u">t</span>');
+  setNum("kpiDiverted", diverted, fmt, '<span class="u">t</span>');
+  setNum("kpiResidual", tonnes - diverted, fmt, '<span class="u">t</span>');
+
+  const setDelta = (id, val, unit) => {
+    const e = document.getElementById(id);
+    if (val === null) { e.textContent = "No prior period"; e.className = "delta"; return; }
+    e.className = "delta " + (val >= 0 ? "up" : "down");
+    // hero tile is a green surface: keep ink black there, never series green
+    const onHero = e.closest(".kpi").classList.contains("hero");
+    e.style.color = onHero ? "#F4F4F2" : (val >= 0 ? C.green : C.neutral);
+    e.textContent = (val >= 0 ? "+" : "") + (unit === "pts" ? fmt1(val) + " pts" : fmt1(val) + "%");
+  };
+  setDelta("kpiRateDelta", prev ? rate - rateOf(prev) : null, "pts");
+  setDelta("kpiTonnesDelta", prev ? ((tonnes - sum(prev, "total")) / sum(prev, "total")) * 100 : null, "%");
+
+  document.getElementById("trendMeta").textContent =
+    cur[0].label + " — " + cur[cur.length - 1].label + (state.region === "ALL" ? " · all regions" : " · " + state.region);
+
+  const mattTonnes = diverted * RAW.streams.find(s => s.name === "Mattresses").share;
+  const epsTonnes  = diverted * RAW.streams.find(s => s.name === "Polystyrene (EPS)").share;
+  const epsM3 = epsTonnes * RAW.epsM3PerTonne;
+  setNum("msMattress", mattTonnes * 1000 / RAW.mattressKg, fmt);
+  setNum("msPoly", epsM3, fmt, '<span class="u">m³</span>');
+  setNum("msContainers", epsM3 / RAW.epsM3PerContainer, fmt);
+
+  // context under the milestones — derived arithmetic only, no new claims
+  const perDay = (mattTonnes * 1000 / RAW.mattressKg) / (state.period * 30.44);
+  document.getElementById("msPerDay").textContent = "· ≈ " + fmt(perDay) + " a day";
+  drawContainers(epsM3 / RAW.epsM3PerContainer);
+
+  // KPI sparklines — the same months the big charts show
+  drawSpark("spkRate", cur.map(d => d.rate), "#4FAE72");
+  drawSpark("spkTonnes", cur.map(d => d.total), "#4FAE72");
+  drawSpark("spkDiverted", cur.map(d => d.total - d.residual), "#4FAE72");
+  drawSpark("spkResidual", cur.map(d => d.residual), "#8a8a8a");
+
+  drawTrend(cur);
+  drawHierarchy(cur);
+  drawStreams(cur);
+  drawRegions(cur);
+  drawTables(cur);
+}
+
+/* ---- controls ---- */
+function wireChips(id, key, cast) {
+  document.getElementById(id).addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if (!b) return;
+    [...e.currentTarget.querySelectorAll(".chip")].forEach(c => c.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", "true");
+    state[key] = cast(b.dataset[key]);
+    render();
+  });
+}
+wireChips("periodChips", "period", v => +v);
+wireChips("regionChips", "region", v => v);
+
+document.getElementById("csvBtn").addEventListener("click", () => {
+  const { cur } = series();
+  const rows = [["month","market","received_t","reused_t","recycled_t","repurposed_t","residual_t","diversion_pct"]];
+  cur.forEach(d => rows.push([d.month, state.region, d.total.toFixed(2), d.reused.toFixed(2),
+    d.recycled.toFixed(2), d.repurposed.toFixed(2), d.residual.toFixed(2), d.rate.toFixed(2)]));
+  rows.push([]); rows.push(["# DEMO DATA — illustrative sample only, not weighbridge figures"]);
+  const blob = new Blob([rows.map(r => r.join(",")).join("\n")], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "recycle-group-diversion-" + state.region.toLowerCase() + "-" + state.period + "mo-DEMO.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+document.getElementById("tableToggle").addEventListener("click", e => {
+  const on = document.getElementById("tables").classList.toggle("on");
+  e.target.setAttribute("aria-expanded", on ? "true" : "false");
+  e.target.textContent = on ? "Hide tables" : "View as tables";
+});
+
+/* ---- freshness stamp ---- */
+(function () {
+  const d = new Date(RAW.lastSync);
+  const mins = Math.max(1, Math.round((Date.now() - d.getTime()) / 60000));
+  const ago = mins < 60 ? mins + " min ago" : Math.round(mins / 60) + " hr ago";
+  document.getElementById("freshness").textContent =
+    "Last depot sync — " + d.toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) + " · " + ago;
+})();
+
+/* ---- entrance: panels rise in once, top to bottom ---- */
+if (ANIM) {
+  document.querySelectorAll(".kpi, .panel, .milestone").forEach((elm, i) => {
+    elm.classList.add("fx");
+    elm.style.setProperty("--d", Math.min(i, 9) * 60 + "ms");
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll(".fx").forEach(elm => elm.classList.add("in"));
+  }));
+}
+
+let rt;
+window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => render(false), 160); });
+render();
+
+</script>
+</body>
+</html>
